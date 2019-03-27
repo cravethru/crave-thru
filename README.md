@@ -8,19 +8,9 @@
 
 ## Overview
 ### Description
-[Description of your app]
-1. Don't know what to eat? Swipe right for a random restaurant, swipe left for favorited ones thus far.
-2. List of all restaurants around you or in a location on Google Maps
-3. View menu of restaurant clicked
-4. See "Best Sellers" and entire menu
-5. Edit menu option for owners
-6. See reviews
-7. Bonus: Put in what they actually ate and upload it, then gain feedback on how people feel about the pricing/quality of the food.
-8. Bonus: Eventful days (Taco Tuesdays at..., Fridays at...)
-9. Bonus: Categorize diff. food types (Healthy, american, etc.)
+This application will help users find a place to eat by presenting a random restaurant in their area. The user will be allowed to swipe in order to discard or save restaurants that they would be interested in visiting. Details like location, reviews, menu, and best sellers will be presented under the details of the restaurant. Ideally, users will be able to show what they ate, give feedback, see special events, and separate restaurants by category.
 
 ### App Evaluation
-[Evaluation of your app across the following attributes]
 - **Category:** Food and Travel
 - **Mobile:** 
     - Accessible
