@@ -90,7 +90,7 @@ This application will help users find a place to eat by presenting a random rest
    * Expanded Details
 
 ## Wireframes
-<img src="" width=600>
+<img src="https://github.com/wumbo-productions/crave-thru/blob/master/wireframes.png" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
