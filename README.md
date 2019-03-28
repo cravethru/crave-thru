@@ -90,11 +90,12 @@ This application will help users find a place to eat by presenting a random rest
    * Expanded Details
 
 ## Wireframes
-<img src="https://github.com/wumbo-productions/crave-thru/blob/master/Crave-Thru.gif" width=182 height=408>
+<img src="" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
 ### [BONUS] Interactive Prototype
+<img src="https://github.com/wumbo-productions/crave-thru/blob/master/Crave-Thru.gif" width=182 height=408>
 
 ## Schema 
 [This section will be completed in Unit 9]
