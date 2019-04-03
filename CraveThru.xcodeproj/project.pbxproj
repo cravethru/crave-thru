@@ -152,7 +152,6 @@
 				54291F0C95541E121C3EF720 /* Pods-CraveThruUITests.debug.xcconfig */,
 				8E4D7DCC47C58956C942DF74 /* Pods-CraveThruUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -583,7 +582,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ang.CraveThru;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -601,7 +600,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ang.CraveThru;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

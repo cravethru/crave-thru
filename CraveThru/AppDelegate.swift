@@ -6,6 +6,7 @@
 //  Copyright © 2019 Angel. All rights reserved.
 //
 
+import Parse
 import UIKit
 
 @UIApplicationMain
