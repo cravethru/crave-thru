@@ -1,0 +1,6 @@
+framework module Pods_CraveThru {
+  umbrella header "Pods-CraveThru-umbrella.h"
+
+  export *
+  module * { export * }
+}
