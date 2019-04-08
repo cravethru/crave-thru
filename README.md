@@ -118,6 +118,14 @@ This application will help users find a place to eat by presenting a random rest
 | typeOfFood        | String  | most known food  |
 | distance          | int     | how far away from location  |
 
+### Carousel Favorites
+| Property  | Type | Description  |
+| :---         |     :---:      |          ---: |
+| userId            | String  | unique id for position in database  |
+| restaurantName    | String  |  |
+| image             | file    | restaurant icon/logo/food reference  |
+| index             | int     | position in list |
+
 ### Models
 [Add table of models]
 ### Networking
