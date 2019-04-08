@@ -97,7 +97,8 @@ This application will help users find a place to eat by presenting a random rest
 <img src="https://github.com/wumbo-productions/crave-thru/blob/master/Crave-Thru.gif" width=182 height=408>
 
 ## Schema 
-### User
+### Models
+#### User
 | Property  | Type | Description  |
 | :---      |     :---:           |          ---: |
 | userId    | int       | unique id for position in database  |
@@ -107,7 +108,7 @@ This application will help users find a place to eat by presenting a random rest
 | createdAt | DateTime  | date when created account  |
 | visited_cities    | String ArrayList | cities user visited with restaurants they favorited  |
 
-### User Favorites
+#### User Favorites
 | Property  | Type | Description  |
 | :---         |     :---:      |          ---: |
 | userId            | String  | unique id for position in database  |
@@ -118,7 +119,7 @@ This application will help users find a place to eat by presenting a random rest
 | typeOfFood        | String  | most known food  |
 | distance          | int     | how far away from location  |
 
-### Carousel Favorites
+#### Carousel Favorites
 | Property  | Type | Description  |
 | :---         |     :---:      |          ---: |
 | userId            | String  | unique id for position in database  |
@@ -126,8 +127,6 @@ This application will help users find a place to eat by presenting a random rest
 | image             | file    | restaurant icon/logo/food reference  |
 | index             | int     | position in list |
 
-### Models
-[Add table of models]
 ### Networking
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
