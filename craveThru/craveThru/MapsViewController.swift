@@ -7,11 +7,14 @@
 //
 
 import UIKit
-import MapKit
+import MapKit       // Display Maps
+import CoreLocation // Show/Update User Location
 
 class MapsViewController: UIViewController {
 
     @IBOutlet weak var map_view: MKMapView!
+    
+    let location_manager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,15 +37,44 @@ class MapsViewController: UIViewController {
         map_view.addAnnotation(annotation)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setupLocationManager() {
+        location_manager.delegate = self
+        location_manager.desiredAccuracy = kCLLocationAccuracyBest
     }
-    */
+    
+    func checkLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {
+            // Setup location manager
+            setupLocationManager()
+        } else {
+            // Show alert letting the user know they have to turn this on
+        }
+    }
+    
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            break
+        case .denied:
+            break
+        case .notDetermined:
+            break
+        case.restricted:
+            break
+        case.authorizedAlways:
+            break
+        }
+    }
+}
 
+extension MapsViewController: CLLocationManagerDelegate {
+    // Do something when location updates
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        <#code#>
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        <#code#>
+    }
 }
