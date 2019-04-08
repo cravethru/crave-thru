@@ -1,21 +1,21 @@
 //
-//  ViewController.swift
+//  MapsViewController.swift
 //  craveThru
 //
-//  Created by Eros Gonzalez on 4/4/19.
+//  Created by Raymond Esteybar on 4/7/19.
 //  Copyright © 2019 Eros Gonzalez. All rights reserved.
 //
 
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
+class MapsViewController: UIViewController {
 
     @IBOutlet weak var map_view: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
         print("Starting Maps")
         
         // 1. Latitude & Longitude of "Monterey"
@@ -33,13 +33,16 @@ class ViewController: UIViewController {
         annotation.subtitle = "California"
         map_view.addAnnotation(annotation)
     }
+    
 
-    func startStandardUpdates() {
-        // Create the location manager if this object does not already have one
-        
-        
-        
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
     }
+    */
 
 }
-

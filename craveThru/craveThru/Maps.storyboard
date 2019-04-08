@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--MapsViewController-->
+        <scene sceneID="Zn5-of-fzY">
+            <objects>
+                <viewController title="MapsViewController" id="0Ac-xf-7Lg" customClass="MapsViewController" customModule="craveThru" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fXr-6v-Dk0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RWh-hz-Qou">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TEST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2PQ-xu-eSu">
+                                <rect key="frame" x="186" y="72" width="41" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Gur-BM-DcU" firstAttribute="bottom" secondItem="RWh-hz-Qou" secondAttribute="bottom" id="4ad-VH-gym"/>
+                            <constraint firstItem="RWh-hz-Qou" firstAttribute="top" secondItem="Gur-BM-DcU" secondAttribute="top" id="ezX-vO-Bw3"/>
+                            <constraint firstItem="RWh-hz-Qou" firstAttribute="leading" secondItem="Gur-BM-DcU" secondAttribute="leading" id="kv0-2p-uEg"/>
+                            <constraint firstItem="Gur-BM-DcU" firstAttribute="trailing" secondItem="RWh-hz-Qou" secondAttribute="trailing" id="qDC-dF-JmA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Gur-BM-DcU"/>
+                    </view>
+                    <connections>
+                        <outlet property="map_view" destination="RWh-hz-Qou" id="xlU-cv-si3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CEd-ZK-Z1R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="154" y="32"/>
+        </scene>
+    </scenes>
+</document>
