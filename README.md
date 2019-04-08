@@ -115,7 +115,7 @@ This application will help users find a place to eat by presenting a random rest
 | restaurantName    | String  |  |
 | image             | file    | restaurant icon/logo/food reference  |
 | index             | int     | position in list  |
-| location          | int     | used to know where restaurant is located  |
+| location          | string  | used to know where restaurant is located  |
 | typeOfFood        | String  | most known food  |
 | distance          | int     | how far away from location  |
 
