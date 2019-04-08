@@ -128,6 +128,15 @@ This application will help users find a place to eat by presenting a random rest
 | index             | int     | position in list |
 
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+- Home Screen
+    - (Read/GET) Query all restaurants around current location
+    - (Create/POST) Add restaurant to City Restaurant Favorites
+    - (Create/POST) Add restaurant to "Favorite List" in "All Restaurants" tab to show favorited restaurants so far
+    - (Read/GET) Get restaurant menu and "Customer Stories"
+- Profile Screen
+    - (Read/GET) Get City -> Restaurant Favorites 
+    - (Read/GET) Profile information -> Username, Date Joined, Profile image
+- All Restaurants Screen
+    - (Read/GET) Query all restaurants around current location
+- Maps Screen
+    - (Read/GET) Get all restaurants within current location
