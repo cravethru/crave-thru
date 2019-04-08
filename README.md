@@ -97,10 +97,46 @@ This application will help users find a place to eat by presenting a random rest
 <img src="https://github.com/wumbo-productions/crave-thru/blob/master/Crave-Thru.gif" width=182 height=408>
 
 ## Schema 
-[This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+#### User
+| Property  | Type | Description  |
+| :---      |     :---:           |          ---: |
+| userId    | int       | unique id for position in database  |
+| username  | String    | unique username for login  |
+| password  | String    | password for  login |
+| image     | file      | app icon  |
+| createdAt | DateTime  | date when created account  |
+| visited_cities    | String ArrayList | cities user visited with restaurants they favorited  |
+
+#### User Favorites
+| Property  | Type | Description  |
+| :---         |     :---:      |          ---: |
+| userId            | int     | unique id for position in database  |
+| restaurantName    | String  |  |
+| image             | file    | restaurant icon/logo/food reference  |
+| index             | int     | position in list  |
+| location          | string  | used to know where restaurant is located  |
+| typeOfFood        | String  | most known food  |
+| distance          | int     | how far away from location  |
+
+#### Carousel Favorites
+| Property  | Type | Description  |
+| :---         |     :---:      |          ---: |
+| userId            | String  | unique id for position in database  |
+| restaurantName    | String  |  |
+| image             | file    | restaurant icon/logo/food reference  |
+| index             | int     | position in list |
+
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+- Home Screen
+    - (Read/GET) Query all restaurants around current location
+    - (Create/POST) Add restaurant to City Restaurant Favorites
+    - (Create/POST) Add restaurant to "Favorite List" in "All Restaurants" tab to show favorited restaurants so far
+    - (Read/GET) Get restaurant menu and "Customer Stories"
+- Profile Screen
+    - (Read/GET) Get City -> Restaurant Favorites 
+    - (Read/GET) Profile information -> Username, Date Joined, Profile image
+- All Restaurants Screen
+    - (Read/GET) Query all restaurants around current location
+- Maps Screen
+    - (Read/GET) Get all restaurants within current location
