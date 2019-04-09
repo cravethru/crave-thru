@@ -8,6 +8,7 @@ target 'craveThru' do
   # Pods for craveThru
   pod "Parse"
   pod "AlamofireImage"
+  pod "Firebase/Core"
 
   target 'craveThruTests' do
     inherit! :search_paths

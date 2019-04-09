@@ -10,10 +10,22 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var signup: UIButton!
+    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let boldText = "Sign up."
+        let regularText = "Need an account "
+        let text = NSMutableAttributedString(string: "\(regularText)\(boldText)")
+        
+        let boldSizeStart = regularText.count
+        
+       text.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 14), range: NSMakeRange(boldSizeStart, boldText.count))
+        
+       signup.setAttributedTitle(text, for:UIControl.State.normal)
         // Do any additional setup after loading the view.
     }
     
