@@ -7,42 +7,87 @@
 //
 
 import UIKit
-import MapKit
+import MapKit       // Display Maps
+import CoreLocation // Show/Update User Location
 
 class MapsViewController: UIViewController {
 
     @IBOutlet weak var map_view: MKMapView!
+    
+    let location_manager = CLLocationManager()
+    let region_in_meters: Double = 10000
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         print("Starting Maps")
         
-        // 1. Latitude & Longitude of "Monterey"
-        let location = CLLocationCoordinate2D(latitude: 36.600256, longitude: -121.8946388)
-        
-        // 2. How far the view is
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        let region = MKCoordinateRegion(center: location, span: span)
-        map_view.setRegion(region, animated: true)
-        
-        // 3. Create Annotation
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = location
-        annotation.title = "Monterey"
-        annotation.subtitle = "California"
-        map_view.addAnnotation(annotation)
+        checkLocationServices()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setupLocationManager() {
+        location_manager.delegate = self as CLLocationManagerDelegate
+        location_manager.desiredAccuracy = kCLLocationAccuracyBest
     }
-    */
+    
+    func centerViewOnUserLocation() {
+        if let location = location_manager.location?.coordinate {
+            
+            // Lat + Lon = How far we're zoomed in
+            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: region_in_meters, longitudinalMeters: region_in_meters)
+            map_view.setRegion(region, animated: true)
+        }
+    }
+    
+    func checkLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {
+            // Setup location manager
+            setupLocationManager()
+            checkLocationAuthorization()
+        } else {
+            // Show alert letting the user know they have to turn this on
+        }
+    }
+    
+    // Only run app when user gives access to location
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:                                      // When App Open, Get located when in use
+            // Do Map Stuff
+            map_view.showsUserLocation = true                           // Puts blue dot on map (User Location)
+            centerViewOnUserLocation()
+            location_manager.startUpdatingLocation()                    // Calls Delegate method
+            break
+        case .denied:                                                   // Not allowed, denied once? Pop up won't show up
+            // Show alert instructing them how to turn on permission
+            break
+        case .notDetermined:
+            location_manager.requestWhenInUseAuthorization()
+        case.restricted:                                                // User cannot change app status, Ex: Parent restricts child's location
+            // Show an alert letting them know
+            break
+        case.authorizedAlways:                                          // Location is always on when app not and in use
+            break
+        }
+    }
+}
 
+extension MapsViewController: CLLocationManagerDelegate {
+    // Do something when location updates
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return } // if nil, do nothing
+        
+        // Makes the zoom in stay the position as the user moves
+        let center = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: region_in_meters, longitudinalMeters: region_in_meters)
+        
+        map_view.setRegion(region, animated: true)
+    }
+    
+    
+    // When user clicks allow, it immediately sets up the user's location
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        // When authorization changes
+        checkLocationAuthorization()
+    }
 }

@@ -60,7 +60,7 @@
                 <viewControllerPlaceholder storyboardName="Maps" id="5cZ-GL-dbQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="18T-fu-Twd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2586.9565217391305" y="37.5"/>
+            <point key="canvasLocation" x="2450" y="38"/>
         </scene>
     </scenes>
 </document>
