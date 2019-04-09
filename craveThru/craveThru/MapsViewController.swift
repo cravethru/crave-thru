@@ -49,23 +49,24 @@ class MapsViewController: UIViewController {
         }
     }
     
+    // Only run app when user gives access to location
     func checkLocationAuthorization() {
         switch CLLocationManager.authorizationStatus() {
-        case .authorizedWhenInUse:  // When App Open, Get located when in use
+        case .authorizedWhenInUse:                                      // When App Open, Get located when in use
             // Do Map Stuff
-            map_view.showsUserLocation = true // Puts blue dot on map
+            map_view.showsUserLocation = true                           // Puts blue dot on map (User Location)
             centerViewOnUserLocation()
-            location_manager.startUpdatingLocation()    // Calls Delegate method
+            location_manager.startUpdatingLocation()                    // Calls Delegate method
             break
-        case .denied:               // Not allowed, denied once? Pop up won't show up
+        case .denied:                                                   // Not allowed, denied once? Pop up won't show up
             // Show alert instructing them how to turn on permission
             break
         case .notDetermined:
             location_manager.requestWhenInUseAuthorization()
-        case.restricted:            // User cannot change app status, Ex: Parent can restrict child's location
+        case.restricted:                                                // User cannot change app status, Ex: Parent restricts child's location
             // Show an alert letting them know
             break
-        case.authorizedAlways:      // Location is always on when app not and in use
+        case.authorizedAlways:                                          // Location is always on when app not and in use
             break
         }
     }
