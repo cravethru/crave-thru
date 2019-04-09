@@ -26,7 +26,7 @@ class MapsViewController: UIViewController {
     }
     
     func setupLocationManager() {
-        location_manager.delegate = self as? CLLocationManagerDelegate
+        location_manager.delegate = self as CLLocationManagerDelegate
         location_manager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
@@ -55,6 +55,7 @@ class MapsViewController: UIViewController {
             // Do Map Stuff
             map_view.showsUserLocation = true // Puts blue dot on map
             centerViewOnUserLocation()
+            location_manager.startUpdatingLocation()    // Calls Delegate method
             break
         case .denied:               // Not allowed, denied once? Pop up won't show up
             // Show alert instructing them how to turn on permission
@@ -69,15 +70,23 @@ class MapsViewController: UIViewController {
         }
     }
 }
-//
-//extension MapsViewController: CLLocationManagerDelegate {
-//    // Do something when location updates
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        <#code#>
-//    }
-//    
-//    
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        <#code#>
-//    }
-//}
+
+extension MapsViewController: CLLocationManagerDelegate {
+    // Do something when location updates
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return } // if nil, do nothing
+        
+        // Makes the zoom in stay the position as the user moves
+        let center = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: region_in_meters, longitudinalMeters: region_in_meters)
+        
+        map_view.setRegion(region, animated: true)
+    }
+    
+    
+    // When user clicks allow, it immediately sets up the user's location
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        // When authorization changes
+        checkLocationAuthorization()
+    }
+}
