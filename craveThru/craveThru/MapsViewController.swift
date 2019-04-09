@@ -54,6 +54,7 @@ class MapsViewController: UIViewController {
         case .authorizedWhenInUse:  // When App Open, Get located when in use
             // Do Map Stuff
             map_view.showsUserLocation = true // Puts blue dot on map
+            centerViewOnUserLocation()
             break
         case .denied:               // Not allowed, denied once? Pop up won't show up
             // Show alert instructing them how to turn on permission
