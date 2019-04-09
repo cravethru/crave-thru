@@ -10,7 +10,6 @@
 		0B0C2892225C029200E5B2C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B0C2891225C029200E5B2C9 /* Main.storyboard */; };
 		0B0C2894225C03EF00E5B2C9 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B0C2893225C03EF00E5B2C9 /* Home.storyboard */; };
 		0B0C289C225C05ED00E5B2C9 /* Maps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B0C289B225C05ED00E5B2C9 /* Maps.storyboard */; };
-		0B0C289E225C06AD00E5B2C9 /* Maps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B0C289D225C06AD00E5B2C9 /* Maps.storyboard */; };
 		0BD46CC1225BF9F000D4914C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD46CC0225BF9F000D4914C /* LoginViewController.swift */; };
 		0BD46CC3225BFF2700D4914C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD46CC2225BFF2700D4914C /* HomeViewController.swift */; };
 		1D7F3A3B2256F6920014E62F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7F3A3A2256F6920014E62F /* AppDelegate.swift */; };
@@ -46,7 +45,6 @@
 		0B0C2891225C029200E5B2C9 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0B0C2893225C03EF00E5B2C9 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		0B0C289B225C05ED00E5B2C9 /* Maps.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Maps.storyboard; sourceTree = "<group>"; };
-		0B0C289D225C06AD00E5B2C9 /* Maps.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Maps.storyboard; sourceTree = "<group>"; };
 		0BD46CC0225BF9F000D4914C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0BD46CC2225BFF2700D4914C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1D7F3A372256F6920014E62F /* craveThru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = craveThru.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,7 +129,6 @@
 				1D7F3A462256F6930014E62F /* Info.plist */,
 				0B0C2891225C029200E5B2C9 /* Main.storyboard */,
 				0B0C2893225C03EF00E5B2C9 /* Home.storyboard */,
-				0B0C289D225C06AD00E5B2C9 /* Maps.storyboard */,
 				0B0C289B225C05ED00E5B2C9 /* Maps.storyboard */,
 				0BD46CC0225BF9F000D4914C /* LoginViewController.swift */,
 				0BD46CC2225BFF2700D4914C /* HomeViewController.swift */,
@@ -289,7 +286,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B0C2892225C029200E5B2C9 /* Main.storyboard in Resources */,
-				0B0C289E225C06AD00E5B2C9 /* Maps.storyboard in Resources */,
 				0B0C2894225C03EF00E5B2C9 /* Home.storyboard in Resources */,
 				0B0C289C225C05ED00E5B2C9 /* Maps.storyboard in Resources */,
 				1D7F3A452256F6930014E62F /* LaunchScreen.storyboard in Resources */,
@@ -593,7 +589,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.WumboApps.craveThru;
+				PRODUCT_BUNDLE_IDENTIFIER = "Raymond-Esteybar.craveThru";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -612,7 +608,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.WumboApps.craveThru;
+				PRODUCT_BUNDLE_IDENTIFIER = "Raymond-Esteybar.craveThru";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
