@@ -8,33 +8,47 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+extension UITextField{
+    func underlined(){
+        let border = CALayer()
+        let width = CGFloat(1.0)
+        border.borderColor = UIColor.darkGray.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
+    }
+}
+
+class LoginViewController: UIViewController, UITextFieldDelegate{
     
     @IBOutlet weak var signup: UIButton!
     
-   
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        usernameField.underlined()
+        passwordField.underlined()
         
-        let boldText = "Sign up."
-        let regularText = "Need an account "
-        let text = NSMutableAttributedString(string: "\(regularText)\(boldText)")
+        usernameField.attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         
-        let boldSizeStart = regularText.count
-        
-       text.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 14), range: NSMakeRange(boldSizeStart, boldText.count))
-        
-       signup.setAttributedTitle(text, for:UIControl.State.normal)
+         passwordField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         // Do any additional setup after loading the view.
     }
-    
 
     @IBAction func onLogin(_ sender: Any) {
         
         self.performSegue(withIdentifier: "LoginSegueue", sender: self)
-        
     }
+    
+    
+   
+    
     
     
     /*
