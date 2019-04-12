@@ -7,6 +7,42 @@
 //
 
 import UIKit
+import Firebase
+
+class LoginViewController: UIViewController, UITextFieldDelegate{
+    @IBOutlet weak var signup: UIButton!
+    
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    
+    var ref: DatabaseReference!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        ref = Database.database().reference()
+        
+        usernameField.underlined()
+        passwordField.underlined()
+        
+        usernameField.attributedPlaceholder = NSAttributedString(string: "E-mail", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        
+         passwordField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+    }
+
+    @IBAction func onLogin(_ sender: Any) {
+        let usernameString = usernameField.text!
+        let passwordString = passwordField.text!
+        
+        Auth.auth().signIn(withEmail: usernameString, password: passwordString) {(user, error) in
+            if error != nil{
+                print (error!)
+            }
+            else{
+                self.performSegue(withIdentifier: "LoginSegueue", sender: self)
+            }
+        }
+    }
+}
 
 extension UITextField{
     func underlined(){
@@ -18,47 +54,4 @@ extension UITextField{
         self.layer.addSublayer(border)
         self.layer.masksToBounds = true
     }
-}
-
-class LoginViewController: UIViewController, UITextFieldDelegate{
-    
-    @IBOutlet weak var signup: UIButton!
-    
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
-    
-    
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        usernameField.underlined()
-        passwordField.underlined()
-        
-        usernameField.attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
-        
-         passwordField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
-        // Do any additional setup after loading the view.
-    }
-
-    @IBAction func onLogin(_ sender: Any) {
-        
-        self.performSegue(withIdentifier: "LoginSegueue", sender: self)
-    }
-    
-    
-   
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
