@@ -10,37 +10,45 @@ import UIKit
 import Firebase
 
 class LoginViewController: UIViewController, UITextFieldDelegate{
-    @IBOutlet weak var signup: UIButton!
-    
-    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
-    var ref: DatabaseReference!
+    @IBOutlet weak var verifyError: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = Database.database().reference()
-        
-        usernameField.underlined()
+        //*Underlining text fields*
+        emailField.underlined()
         passwordField.underlined()
         
-        usernameField.attributedPlaceholder = NSAttributedString(string: "E-mail", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        //*changing placeholder text color to dark gray*
+        emailField.attributedPlaceholder = NSAttributedString(string: "E-mail", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         
          passwordField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
     }
 
     @IBAction func onLogin(_ sender: Any) {
-        let usernameString = usernameField.text!
-        let passwordString = passwordField.text!
+        let emailText = emailField.text!
+        let passwordText = passwordField.text!
         
-        Auth.auth().signIn(withEmail: usernameString, password: passwordString) {(user, error) in
+        Auth.auth().signIn(withEmail: emailText, password: passwordText) {(user, error) in
             if error != nil{
                 print (error!)
             }
-            else{
-                self.performSegue(withIdentifier: "LoginSegueue", sender: self)
+            else if let user = Auth.auth().currentUser{
+                if !user.isEmailVerified{
+                    self.verifyError.textColor = UIColor.red
+                }
+                else{
+                    self.verifyError.textColor = UIColor.white
+                    self.performSegue(withIdentifier: "LoginSegueue", sender: self)
+                }
             }
         }
+    }
+    
+    @IBAction func onSignup(_ sender: Any) {
+        self.performSegue(withIdentifier: "SignupSegueue", sender: self)
     }
 }
 
