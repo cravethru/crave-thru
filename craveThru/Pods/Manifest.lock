@@ -64,6 +64,7 @@ PODS:
   - GoogleUtilities/UserDefaults (5.3.7):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.1)
+  - iCarousel (1.8.3)
   - leveldb-library (1.20)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
@@ -80,6 +81,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
+  - iCarousel (~> 1.8)
   - Parse
 
 SPEC REPOS:
@@ -97,6 +99,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - GTMSessionFetcher
+    - iCarousel
     - leveldb-library
     - nanopb
     - Parse
@@ -115,10 +118,11 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 621f3bc6211d5ba548debe01fafad30cf5ab6859
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
+  iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Parse: 3b31a3dd1777b07ee7f0caee32fafbff544483a5
 
-PODFILE CHECKSUM: 7498d0e78a8c5aa9b659f887bf7b35af87eca56e
+PODFILE CHECKSUM: fdb07de4106eaceae3022fa84a98c6177661bc36
 
 COCOAPODS: 1.5.3
