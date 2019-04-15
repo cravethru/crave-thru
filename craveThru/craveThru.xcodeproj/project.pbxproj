@@ -10,6 +10,12 @@
 		0B0C2892225C029200E5B2C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B0C2891225C029200E5B2C9 /* Main.storyboard */; };
 		0B0C2894225C03EF00E5B2C9 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B0C2893225C03EF00E5B2C9 /* Home.storyboard */; };
 		0B0C289C225C05ED00E5B2C9 /* Maps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B0C289B225C05ED00E5B2C9 /* Maps.storyboard */; };
+		0B26926922646048007C38A4 /* ExpandedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B26926822646048007C38A4 /* ExpandedViewController.swift */; };
+		0B26926B226460E0007C38A4 /* Details.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B26926A226460E0007C38A4 /* Details.storyboard */; };
+		0B26926D2264633D007C38A4 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B26926C2264633D007C38A4 /* Profile.storyboard */; };
+		0B26926F2264634E007C38A4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B26926E2264634E007C38A4 /* ProfileViewController.swift */; };
+		0B269271226463CB007C38A4 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B269270226463CB007C38A4 /* ListViewController.swift */; };
+		0B269273226463E5007C38A4 /* List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B269272226463E5007C38A4 /* List.storyboard */; };
 		0BD46CC1225BF9F000D4914C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD46CC0225BF9F000D4914C /* LoginViewController.swift */; };
 		0BD46CC3225BFF2700D4914C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD46CC2225BFF2700D4914C /* HomeViewController.swift */; };
 		1D502A6B225FD23D007CDB1E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */; };
@@ -48,6 +54,12 @@
 		0B0C2891225C029200E5B2C9 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0B0C2893225C03EF00E5B2C9 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		0B0C289B225C05ED00E5B2C9 /* Maps.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Maps.storyboard; sourceTree = "<group>"; };
+		0B26926822646048007C38A4 /* ExpandedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedViewController.swift; sourceTree = "<group>"; };
+		0B26926A226460E0007C38A4 /* Details.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Details.storyboard; sourceTree = "<group>"; };
+		0B26926C2264633D007C38A4 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		0B26926E2264634E007C38A4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		0B269270226463CB007C38A4 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		0B269272226463E5007C38A4 /* List.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = List.storyboard; sourceTree = "<group>"; };
 		0BD46CC0225BF9F000D4914C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0BD46CC2225BFF2700D4914C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -138,9 +150,15 @@
 				1D502A6E22601A71007CDB1E /* SignupViewController.swift */,
 				1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */,
 				0B0C2893225C03EF00E5B2C9 /* Home.storyboard */,
+				0B269272226463E5007C38A4 /* List.storyboard */,
+				0B26926C2264633D007C38A4 /* Profile.storyboard */,
+				0B26926A226460E0007C38A4 /* Details.storyboard */,
 				0B0C289B225C05ED00E5B2C9 /* Maps.storyboard */,
 				0BD46CC0225BF9F000D4914C /* LoginViewController.swift */,
 				0BD46CC2225BFF2700D4914C /* HomeViewController.swift */,
+				0B26926822646048007C38A4 /* ExpandedViewController.swift */,
+				0B26926E2264634E007C38A4 /* ProfileViewController.swift */,
+				0B269270226463CB007C38A4 /* ListViewController.swift */,
 			);
 			path = craveThru;
 			sourceTree = "<group>";
@@ -296,11 +314,14 @@
 			files = (
 				1D502A6D2260196F007CDB1E /* Signup.storyboard in Resources */,
 				0B0C2892225C029200E5B2C9 /* Main.storyboard in Resources */,
+				0B269273226463E5007C38A4 /* List.storyboard in Resources */,
 				0B0C2894225C03EF00E5B2C9 /* Home.storyboard in Resources */,
 				0B0C289C225C05ED00E5B2C9 /* Maps.storyboard in Resources */,
 				1D7F3A452256F6930014E62F /* LaunchScreen.storyboard in Resources */,
 				1D7F3A422256F6930014E62F /* Assets.xcassets in Resources */,
+				0B26926D2264633D007C38A4 /* Profile.storyboard in Resources */,
 				1D502A6B225FD23D007CDB1E /* GoogleService-Info.plist in Resources */,
+				0B26926B226460E0007C38A4 /* Details.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,7 +454,10 @@
 				0BD46CC3225BFF2700D4914C /* HomeViewController.swift in Sources */,
 				0BD46CC1225BF9F000D4914C /* LoginViewController.swift in Sources */,
 				1D502A6F22601A71007CDB1E /* SignupViewController.swift in Sources */,
+				0B26926922646048007C38A4 /* ExpandedViewController.swift in Sources */,
+				0B26926F2264634E007C38A4 /* ProfileViewController.swift in Sources */,
 				28985CE6225B03020038193D /* MapsViewController.swift in Sources */,
+				0B269271226463CB007C38A4 /* ListViewController.swift in Sources */,
 				1D7F3A3B2256F6920014E62F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

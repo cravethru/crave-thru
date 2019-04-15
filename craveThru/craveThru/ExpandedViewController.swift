@@ -1,24 +1,19 @@
+
 //
-//  HomeViewController.swift
+//  ExpandedViewController.swift
 //  craveThru
 //
-//  Created by Angel on 4/8/19.
+//  Created by Angel on 4/14/19.
 //  Copyright © 2019 Eros Gonzalez. All rights reserved.
 //
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class ExpandedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
-        let image = UIImage(named: "logoColor.png")
-        imageView.image = image
-        navigationItem.titleView = imageView
-        
-        
+
         // Do any additional setup after loading the view.
     }
     
