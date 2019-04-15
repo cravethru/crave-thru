@@ -96,6 +96,9 @@ This application will help users find a place to eat by presenting a random rest
 ### [BONUS] Interactive Prototype
 <img src="https://github.com/wumbo-productions/crave-thru/blob/master/Crave-Thru.gif" width=182 height=408>
 
+### Milestone 1
+<img src="https://i.imgur.com/1ppo0SE.gif" width=182 height=408>
+
 ## Schema 
 ### Models
 #### User
