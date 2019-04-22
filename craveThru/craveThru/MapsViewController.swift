@@ -10,12 +10,20 @@ import UIKit
 import MapKit       // Display Maps
 import CoreLocation // Show/Update User Location
 
+// Parse JSON
+import Foundation
+
 class MapsViewController: UIViewController {
 
     @IBOutlet weak var map_view: MKMapView!
     
     let location_manager = CLLocationManager()
     let region_in_meters: Double = 10000
+
+    // Places API
+    let client_id = "UH3KGN3HLTNDN1DIA1EIY0FKN120TC5W2L1H22EFPXMZFHJF"
+    let client_secret = "OQ0F5RZWB53GZSWIKC4YWBTTJ4IDXQPPICLZQEUD3GQITVAA"
+    let food_id = "4d4b7105d754a06374d81259"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +84,17 @@ extension MapsViewController: CLLocationManagerDelegate {
     // Do something when location updates
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return } // if nil, do nothing
+        
+        let jsonString = "https://api.foursquare.com/v2/venues/search?ll=\(location.coordinate.latitude),\(location.coordinate.longitude)&categoryId=\(food_id)&client_id=\(client_id)&client_secret=\(client_secret)&v=20190417"
+        
+        guard let url = URL(string: jsonString) else { return }
+        
+        URLSession.shared.dataTask(with: url){ (data, response, err) in
+            guard let data = data else {return}
+            let dataAsString = String(data: data, encoding: .utf8)
+            print("hello")
+            print(dataAsString!)
+        }.resume()
         
         // Makes the zoom in stay the position as the user moves
         let center = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
