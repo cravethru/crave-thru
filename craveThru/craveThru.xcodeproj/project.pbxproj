@@ -21,6 +21,8 @@
 		1D502A6B225FD23D007CDB1E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */; };
 		1D502A6D2260196F007CDB1E /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D502A6C2260196F007CDB1E /* Signup.storyboard */; };
 		1D502A6F22601A71007CDB1E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D502A6E22601A71007CDB1E /* SignupViewController.swift */; };
+		1D502A71226549EC007CDB1E /* UserProfileFavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D502A70226549EC007CDB1E /* UserProfileFavoritesCollectionViewCell.swift */; };
+		1D5DBFC22267D3600096B455 /* ProfileFavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DBFC12267D3600096B455 /* ProfileFavoritesTableViewCell.swift */; };
 		1D7F3A3B2256F6920014E62F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7F3A3A2256F6920014E62F /* AppDelegate.swift */; };
 		1D7F3A422256F6930014E62F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D7F3A412256F6930014E62F /* Assets.xcassets */; };
 		1D7F3A452256F6930014E62F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D7F3A432256F6930014E62F /* LaunchScreen.storyboard */; };
@@ -65,6 +67,8 @@
 		1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1D502A6C2260196F007CDB1E /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		1D502A6E22601A71007CDB1E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		1D502A70226549EC007CDB1E /* UserProfileFavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileFavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
+		1D5DBFC12267D3600096B455 /* ProfileFavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		1D7F3A372256F6920014E62F /* craveThru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = craveThru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D7F3A3A2256F6920014E62F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D7F3A412256F6930014E62F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -152,6 +156,8 @@
 				0B0C2893225C03EF00E5B2C9 /* Home.storyboard */,
 				0B269272226463E5007C38A4 /* List.storyboard */,
 				0B26926C2264633D007C38A4 /* Profile.storyboard */,
+				1D5DBFC12267D3600096B455 /* ProfileFavoritesTableViewCell.swift */,
+				1D502A70226549EC007CDB1E /* UserProfileFavoritesCollectionViewCell.swift */,
 				0B26926A226460E0007C38A4 /* Details.storyboard */,
 				0B0C289B225C05ED00E5B2C9 /* Maps.storyboard */,
 				0BD46CC0225BF9F000D4914C /* LoginViewController.swift */,
@@ -376,9 +382,13 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Parse/Parse.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -390,9 +400,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parse.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -453,8 +467,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D502A71226549EC007CDB1E /* UserProfileFavoritesCollectionViewCell.swift in Sources */,
 				0BD46CC3225BFF2700D4914C /* HomeViewController.swift in Sources */,
 				0BD46CC1225BF9F000D4914C /* LoginViewController.swift in Sources */,
+				1D5DBFC22267D3600096B455 /* ProfileFavoritesTableViewCell.swift in Sources */,
 				1D502A6F22601A71007CDB1E /* SignupViewController.swift in Sources */,
 				0B26926922646048007C38A4 /* ExpandedViewController.swift in Sources */,
 				0B26926F2264634E007C38A4 /* ProfileViewController.swift in Sources */,
