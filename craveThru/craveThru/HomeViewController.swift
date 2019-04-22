@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
         let image = UIImage(named: "logoColor.png")
         imageView.image = image
         navigationItem.titleView = imageView
