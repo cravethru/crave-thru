@@ -15,6 +15,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var memberSinceLabel: UILabel!
     
+    @IBOutlet weak var onSortByAllButton: UIButton!
+    @IBOutlet weak var onSortBySavedButton: UIButton!
+    @IBOutlet weak var onSortByLikedButton: UIButton!
+    
+    
     var imgArray = [UIImage(named: "1"), UIImage(named: "2"),UIImage(named: "3"),UIImage(named: "4"),UIImage(named: "5")]
 
     override func viewDidLoad() {
@@ -57,6 +62,39 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         return cell
     }
+    
+    @IBAction func onSortByAll(_ sender: Any) {
+        //sorts restuarants alhphabetically
+        if onSortByAllButton.currentImage == UIImage(named: "list_color"){
+            onSortByAllButton.setImage(UIImage(named: "list_gray"), for: .normal)
+        }
+        else{
+            onSortByAllButton.setImage(UIImage(named: "list_color"), for: .normal)
+        }
+        
+    }
+    
+    @IBAction func onSortBySaved(_ sender: Any) {
+        //sorts restaurants alphabetically and if saved button was tapped
+        if onSortBySavedButton.currentImage == UIImage(named: "logoColorPlus"){
+            onSortBySavedButton.setImage(UIImage(named: "logoGrayPlus"), for: .normal)
+        }
+        else{
+            onSortBySavedButton.setImage(UIImage(named: "logoColorPlus"), for: .normal)
+        }
+    }
+    
+    @IBAction func onSortByLiked(_ sender: Any) {
+        //sorts restaurants alphabetically and if restaurant was swipped right
+        if onSortByLikedButton.currentImage == UIImage(named: "color_check_mark"){
+            onSortByLikedButton.setImage(UIImage(named: "gray_check_mark"), for: .normal)
+        }
+        else{
+            onSortByLikedButton.setImage(UIImage(named: "color_check_mark"), for: .normal)
+        }
+    }
+    
+    
     
     func getDataFromDatabase(dbRef: DocumentReference){
         dbRef.getDocument{ (document, error) in

@@ -26,17 +26,20 @@
                                     <segue destination="0R7-cZ-VXx" kind="show" id="sfX-vV-6EW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3YG-HK-AQZ">
-                                <rect key="frame" x="344" y="707" width="55" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Favorite"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="atc-gf-tUv">
                                 <rect key="frame" x="364" y="783" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Info"/>
                                 <connections>
                                     <segue destination="L04-bP-nEl" kind="show" id="AQG-eC-eU9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3YG-HK-AQZ">
+                                <rect key="frame" x="344" y="687" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Favorite" image="logoGrayPlus"/>
+                                <connections>
+                                    <action selector="onSaved:" destination="29T-20-XsV" eventType="touchUpInside" id="a8b-XT-8LZ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -111,4 +114,7 @@
             <point key="canvasLocation" x="4807" y="-60"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logoGrayPlus" width="800" height="800"/>
+    </resources>
 </document>
