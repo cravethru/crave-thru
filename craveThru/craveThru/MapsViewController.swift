@@ -35,19 +35,27 @@ class MapsViewController: UIViewController {
         
         checkLocationServices()
         
-        // Example
-        // To display annotations
-        // Annotation View:
-        //  - Title
-        //  - Subtitle -> location_name
-//        let sample_starbucks = Restaurant(title: "Starbucks Imagination", location_name: "Imagination Street", coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.431297))
-//        map_view.addAnnotation(sample_starbucks)
-        
         map_view.delegate = self
     }
     
     func fetchData(location: CLLocation) {
-        let search_url = "https://api.foursquare.com/v2/venues/search?ll=\(location.coordinate.latitude),\(location.coordinate.longitude)&categoryId=\(food_id)&client_id=\(client_id)&client_secret=\(client_secret)&v=20190421"
+        let current_date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: current_date)
+        let year = components.year
+        var month = components.month
+        let day = components.day
+        var check_month: String = ""
+        
+        if let unwrapped_month = components.month {
+            if unwrapped_month >= 1 && unwrapped_month <= 9 {
+                check_month = "0\(unwrapped_month)"
+            } else {
+                check_month = "\(unwrapped_month)"
+            }
+        }
+        
+        let search_url = "https://api.foursquare.com/v2/venues/search?ll=\(location.coordinate.latitude),\(location.coordinate.longitude)&categoryId=\(food_id)&client_id=\(client_id)&client_secret=\(client_secret)&v=\(year!)\(check_month)\(day!)"
         
         guard let search_request = URL(string: search_url) else { return }
         
@@ -69,8 +77,29 @@ class MapsViewController: UIViewController {
             }
             }.resume()
         
-        //        let restaurant_id = "428a8580f964a52083231fe3"
-        //        let menu_url = "https://api.foursquare.com/v2/venues/\(restaurant_id)/menu?client_id=\(client_id)&client_secret=\(client_secret)&v=20190421"
+        // 1. Grab Restaurant ID
+//        let restaurant_id = "428a8580f964a52083231fe3"
+        
+        // 2. Use URL
+        //  - Plug in info
+        //      a. Restaurant ID
+        //      b. Client ID
+        //      c. Client Secret
+//        let menu_url = "https://api.foursquare.com/v2/venues/\(restaurant_id)/menu?client_id=\(client_id)&client_secret=\(client_secret)&v=20190421"
+//
+//        // https://api.foursquare.com/v2/venues/VENUE_ID/menu
+//
+//        // 2
+//        guard let menu_request = URL(string: menu_url) else { return }
+//
+//        // 3
+//        URLSession.shared.dataTask(with: menu_request) { (data, response, err) in
+//            guard let data = data else {return}
+//
+//            let dataAsString = String(data: data, encoding: .utf8)
+//            print (dataAsString)
+//
+//            }.resume()
     }
     
     func setupLocationManager() {

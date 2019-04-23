@@ -29,7 +29,6 @@ class Restaurant: NSObject, MKAnnotation {
         var address: String = ""
         var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         
-            
         // - Read JSON -> Store in Dictionary
         //  - Get Restaurant Name
         if let unwrapped_title = restaurant["name"] as? String {
