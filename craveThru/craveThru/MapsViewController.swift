@@ -28,25 +28,37 @@ class MapsViewController: UIViewController {
     // All Restaurants around User Location
     var restaurants = [Restaurant]()
     
+    // Current Date
+    var current_date: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         print("Starting Maps")
+        map_view.delegate = self
         
+        getDate()
         checkLocationServices()
         
-        map_view.delegate = self
+        // Makes "Search" request from Places API
+        if let location = location_manager.location?.coordinate {
+            print("------Fetching Data!------")
+            fetchData(latitude: location.latitude, longitude: location.longitude)
+        }
     }
     
-    func fetchData(location: CLLocation) {
-        let current_date = Date()
+    func getDate() {
+        // 1. Setup Date & Calendar
+        let date = Date()
         let calendar = Calendar.current
-        let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: current_date)
+        
+        // 2. Get Date for Places API Request URLs
+        let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: date)
         let year = components.year
-        var month = components.month
         let day = components.day
         var check_month: String = ""
         
+        // 3. Format month
         if let unwrapped_month = components.month {
             if unwrapped_month >= 1 && unwrapped_month <= 9 {
                 check_month = "0\(unwrapped_month)"
@@ -55,19 +67,31 @@ class MapsViewController: UIViewController {
             }
         }
         
-        let search_url = "https://api.foursquare.com/v2/venues/search?ll=\(location.coordinate.latitude),\(location.coordinate.longitude)&categoryId=\(food_id)&client_id=\(client_id)&client_secret=\(client_secret)&v=\(year!)\(check_month)\(day!)"
+        // 4. Setup Current Date
+        current_date = "\(year!)\(check_month)\(day!)"
+    }
+    
+    func fetchData(latitude: Double, longitude: Double) {
+        // 1. Use 'Search' request URL from Places API
+        let search_url = "https://api.foursquare.com/v2/venues/search?ll=\(latitude),\(longitude)&categoryId=\(food_id)&client_id=\(client_id)&client_secret=\(client_secret)&v=\(current_date)"
         
-        guard let search_request = URL(string: search_url) else { return }
+        //  - Format URL
+        guard let url = URL(string: search_url) else { return }
         
-        // Parses JSON from "Search for Venues" request
-        URLSession.shared.dataTask(with: search_request) { (data, response, err) in
+        // 2. Parses JSON from "Search for Venues" request
+        URLSession.shared.dataTask(with: url) { (data, response, err) in
             guard let data = data else {return}
-            
+//            let dataAsString = String(data: data, encoding: .utf8)
+//            print (dataAsString)
             // - Read JSON -> Store in Dictionary
             if let json = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                 if let unwrapped_response = json["response"] as? [String: Any] {
                     let venues_json: [[String: Any]] = unwrapped_response["venues"] as! [[String: Any]]
                     
+                    //  - Store:
+                    //      Title
+                    //      Address
+                    //      Coordinate
                     for venue_json in venues_json {
                         if let venue = Restaurant.from(restaurant: venue_json) {
                             self.restaurants.append(venue)
@@ -75,31 +99,10 @@ class MapsViewController: UIViewController {
                     }
                 }
             }
+            
+            // 3. Add Annotations
+            self.map_view.addAnnotations(self.restaurants)
             }.resume()
-        
-        // 1. Grab Restaurant ID
-//        let restaurant_id = "428a8580f964a52083231fe3"
-        
-        // 2. Use URL
-        //  - Plug in info
-        //      a. Restaurant ID
-        //      b. Client ID
-        //      c. Client Secret
-//        let menu_url = "https://api.foursquare.com/v2/venues/\(restaurant_id)/menu?client_id=\(client_id)&client_secret=\(client_secret)&v=20190421"
-//
-//        // https://api.foursquare.com/v2/venues/VENUE_ID/menu
-//
-//        // 2
-//        guard let menu_request = URL(string: menu_url) else { return }
-//
-//        // 3
-//        URLSession.shared.dataTask(with: menu_request) { (data, response, err) in
-//            guard let data = data else {return}
-//
-//            let dataAsString = String(data: data, encoding: .utf8)
-//            print (dataAsString)
-//
-//            }.resume()
     }
     
     func setupLocationManager() {
@@ -123,6 +126,7 @@ class MapsViewController: UIViewController {
             checkLocationAuthorization()
         } else {
             // Show alert letting the user know they have to turn this on
+            print("Location Services Not enabled")
         }
     }
     
@@ -158,11 +162,6 @@ extension MapsViewController: CLLocationManagerDelegate {
         let center = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         let region = MKCoordinateRegion.init(center: center, latitudinalMeters: region_in_meters, longitudinalMeters: region_in_meters)
         
-        // Makes "Search" request from Places API
-        fetchData(location: location)
-        map_view.addAnnotations(restaurants)
-        print("-----Restaurant count: \(restaurants.count)-----")
-        
         map_view.setRegion(region, animated: true)
     }
     
@@ -175,6 +174,8 @@ extension MapsViewController: CLLocationManagerDelegate {
 }
 
 extension MapsViewController: MKMapViewDelegate {
+    
+    // Setting up the Annotation & Pin
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? Restaurant {
             let identifier = "pin"

@@ -11,17 +11,17 @@ import AddressBook
 
 class Restaurant: NSObject, MKAnnotation {
     let title: String?
-    let location_name: String?
+    let address: String?
     let coordinate: CLLocationCoordinate2D
     
-    init(title: String, location_name: String, coordinate: CLLocationCoordinate2D) {
+    init(title: String, address: String, coordinate: CLLocationCoordinate2D) {
         self.title = title;
-        self.location_name = location_name
+        self.address = address
         self.coordinate = coordinate
     }
     
     var subtitle: String? {
-        return location_name
+        return address
     }
     
     class func from(restaurant: [String: Any]) -> Restaurant? {
@@ -45,6 +45,6 @@ class Restaurant: NSObject, MKAnnotation {
             coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
         }
     
-        return Restaurant(title: title, location_name: address, coordinate: coordinate)
+        return Restaurant(title: title, address: address, coordinate: coordinate)
     }
 }
