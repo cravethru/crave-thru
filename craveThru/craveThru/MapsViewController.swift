@@ -39,12 +39,6 @@ class MapsViewController: UIViewController {
         
         getDate()
         checkLocationServices()
-        
-        // Makes "Search" request from Places API
-        if let location = location_manager.location?.coordinate {
-            print("------Fetching Data!------")
-            fetchData(latitude: location.latitude, longitude: location.longitude)
-        }
     }
     
     func getDate() {
@@ -73,7 +67,7 @@ class MapsViewController: UIViewController {
     
     func fetchData(latitude: Double, longitude: Double) {
         // 1. Use 'Search' request URL from Places API
-        let search_url = "https://api.foursquare.com/v2/venues/search?ll=\(latitude),\(longitude)&categoryId=\(food_id)&client_id=\(client_id)&client_secret=\(client_secret)&v=\(current_date)"
+        let search_url = "https://api.foursquare.com/v2/venues/search?ll=\(latitude),\(longitude)&categoryId=\(food_id)&radius=10000&client_id=\(client_id)&client_secret=\(client_secret)&v=\(current_date)"
         
         //  - Format URL
         guard let url = URL(string: search_url) else { return }
@@ -87,14 +81,17 @@ class MapsViewController: UIViewController {
             if let json = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                 if let unwrapped_response = json["response"] as? [String: Any] {
                     let venues_json: [[String: Any]] = unwrapped_response["venues"] as! [[String: Any]]
-                    
                     //  - Store:
                     //      Title
                     //      Address
                     //      Coordinate
+                    var counter = 1
+                    self.restaurants.removeAll()
                     for venue_json in venues_json {
                         if let venue = Restaurant.from(restaurant: venue_json) {
                             self.restaurants.append(venue)
+                            print(counter)
+                            counter += 1
                         }
                     }
                 }
@@ -102,6 +99,8 @@ class MapsViewController: UIViewController {
             
             // 3. Add Annotations
             self.map_view.addAnnotations(self.restaurants)
+            
+            print("Restaurants: \(self.restaurants.count)")
             }.resume()
     }
     
@@ -138,6 +137,12 @@ class MapsViewController: UIViewController {
             map_view.showsUserLocation = true                           // Puts blue dot on map (User Location)
             centerViewOnUserLocation()
             location_manager.startUpdatingLocation()                    // Calls Delegate method
+            // Makes "Search" request from Places API
+            if let location = location_manager.location?.coordinate {
+                print("------Fetching Data!------")
+                fetchData(latitude: location.latitude, longitude: location.longitude)
+                print("Lat: \(location.latitude), Lon: \(location.longitude)")
+            }
             break
         case .denied:                                                   // Not allowed, denied once? Pop up won't show up
             // Show alert instructing them how to turn on permission
