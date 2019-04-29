@@ -96,6 +96,7 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
             // Create Annotations
             //  - Show restaurants
             self.populateNearByPlaces()
+//            self.fetchData(latitude: latitude, longitude: longitude)
         }
     }
     
@@ -129,7 +130,7 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
     //  - Retrieves JSON data
     func fetchData(latitude: Double, longitude: Double) {
         // 1. Use 'Search' request URL from Places API
-        let search_url = "https://api.foursquare.com/v2/venues/search?categoryId=\(food_id)&client_id=\(client_id)&client_secret=\(client_secret)&v=\(current_date)"
+        let search_url = "https://api.foursquare.com/v2/venues/search?ll=\(latitude),\(longitude)&categoryId=\(food_id)&client_id=\(client_id)&client_secret=\(client_secret)&v=\(current_date)"
         
         //  - Format URL
         guard let url = URL(string: search_url) else { return }
@@ -139,6 +140,11 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
             guard let data = data else {return}
 //            let dataAsString = String(data: data, encoding: .utf8)
 //            print (dataAsString)
+            
+            // Remove annotations (pins)
+            let annotations = self.map_view.annotations
+            self.map_view.removeAnnotations(annotations)
+            
             // - Read JSON -> Store in Dictionary
             if let json = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                 if let unwrapped_response = json["response"] as? [String: Any] {
@@ -172,12 +178,35 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
         request.naturalLanguageQuery = "Restaurants"
         request.region = self.map_view.region
         
-        let search = MKLocalSearch(request: request)
+        var search = MKLocalSearch(request: request)
         search.start { (response, error) in
             guard let response = response else { return }
             
 //            print("Total Restaurants Found: \(response.mapItems.count)")
 //            print(response.mapItems)
+            
+            // Create Annotations / Pins on Map
+            for item in response.mapItems {
+                let annotation = MKPointAnnotation()
+                
+                // Store ea. restaurant's info
+                annotation.title = item.name
+                annotation.coordinate = item.placemark.coordinate
+                
+                DispatchQueue.main.async {
+                    self.map_view.addAnnotation(annotation)
+                }
+            }
+        }
+        
+        request.naturalLanguageQuery = "Fast Food"
+        
+        search = MKLocalSearch(request: request)
+        search.start { (response, error) in
+            guard let response = response else { return }
+            
+            //            print("Total Restaurants Found: \(response.mapItems.count)")
+            //            print(response.mapItems)
             
             // Create Annotations / Pins on Map
             for item in response.mapItems {
@@ -270,6 +299,7 @@ extension MapsViewController: CLLocationManagerDelegate {
 //        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: region_in_meters, longitudinalMeters: region_in_meters)
 //
 //        map_view.setRegion(region, animated: true)
+        populateNearByPlaces()
     }
     
     
