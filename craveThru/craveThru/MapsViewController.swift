@@ -13,7 +13,7 @@ import CoreLocation // Show/Update User Location
 // Parse JSON
 import Foundation
 
-class MapsViewController: UIViewController {
+class MapsViewController: UIViewController, UISearchBarDelegate {
 
     @IBOutlet weak var map_view: MKMapView!
     
@@ -35,12 +35,73 @@ class MapsViewController: UIViewController {
         super.viewDidLoad()
 
         print("Starting Maps")
-        map_view.delegate = self
         
         getDate()
         checkLocationServices()
     }
     
+    // Searches a Location
+    //  - Displays Search Bar
+    @IBAction func searchButton(_ sender: Any) {
+        let search_controller = UISearchController(searchResultsController: nil)
+        search_controller.searchBar.delegate = self
+        present(search_controller, animated: true, completion: nil)
+    }
+    
+    //  - When user clicks on "Search" in Keyboard
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // Ignore User
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        // Activity Indicator
+        //  - Show's "loading" progress
+        let activity_indicator = UIActivityIndicatorView()
+        activity_indicator.style = UIActivityIndicatorView.Style.gray
+        activity_indicator.center = self.view.center // Center indicator in middle of screen
+        activity_indicator.hidesWhenStopped = true
+        activity_indicator.startAnimating()
+        
+        self.view.addSubview(activity_indicator)
+        
+        // Hide search bar
+        searchBar.resignFirstResponder()
+        dismiss(animated: true, completion: nil)
+        
+        // Create search request
+        let search_request = MKLocalSearch.Request()
+        search_request.naturalLanguageQuery = searchBar.text
+        
+        let search = MKLocalSearch(request: search_request)
+        search.start { (response, error) in
+            guard let response = response else { return }
+            
+            activity_indicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+            
+            // Remove annotations (pins)
+            let annotations = self.map_view.annotations
+            self.map_view.removeAnnotations(annotations)
+            
+            // Get Location Data
+            let latitude = response.boundingRegion.center.latitude
+            let longitude = response.boundingRegion.center.longitude
+            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            
+            // Zoom in on annotation
+            let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1) // How much we want to be zoomed in at that coordinate
+            let region = MKCoordinateRegion(center: coordinate, span: span)
+            
+            self.map_view.region = region
+            
+            // Create Annotations
+            //  - Show restaurants
+            self.populateNearByPlaces()
+        }
+    }
+    
+    
+    // Option 1: Places API
+    //  - Requires current date in URL
     func getDate() {
         // 1. Setup Date & Calendar
         let date = Date()
@@ -65,9 +126,10 @@ class MapsViewController: UIViewController {
         current_date = "\(year!)\(check_month)\(day!)"
     }
     
+    //  - Retrieves JSON data
     func fetchData(latitude: Double, longitude: Double) {
         // 1. Use 'Search' request URL from Places API
-        let search_url = "https://api.foursquare.com/v2/venues/search?ll=\(latitude),\(longitude)&categoryId=\(food_id)&radius=10000&client_id=\(client_id)&client_secret=\(client_secret)&v=\(current_date)"
+        let search_url = "https://api.foursquare.com/v2/venues/search?categoryId=\(food_id)&client_id=\(client_id)&client_secret=\(client_secret)&v=\(current_date)"
         
         //  - Format URL
         guard let url = URL(string: search_url) else { return }
@@ -97,27 +159,43 @@ class MapsViewController: UIViewController {
                 }
             }
             
-            // 3. Add Annotations
+            // 3. Show pins on screen
             self.map_view.addAnnotations(self.restaurants)
             
             print("Restaurants: \(self.restaurants.count)")
             }.resume()
     }
     
-    func setupLocationManager() {
-        location_manager.delegate = self as CLLocationManagerDelegate
-        location_manager.desiredAccuracy = kCLLocationAccuracyBest
-    }
-    
-    func centerViewOnUserLocation() {
-        if let location = location_manager.location?.coordinate {
+    // Option 2: Use Apple's Local Search for Restaurants
+    func populateNearByPlaces() {
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = "Restaurants"
+        request.region = self.map_view.region
+        
+        let search = MKLocalSearch(request: request)
+        search.start { (response, error) in
+            guard let response = response else { return }
             
-            // Lat + Lon = How far we're zoomed in
-            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: region_in_meters, longitudinalMeters: region_in_meters)
-            map_view.setRegion(region, animated: true)
+//            print("Total Restaurants Found: \(response.mapItems.count)")
+//            print(response.mapItems)
+            
+            // Create Annotations / Pins on Map
+            for item in response.mapItems {
+                let annotation = MKPointAnnotation()
+                
+                // Store ea. restaurant's info
+                annotation.title = item.name
+                annotation.coordinate = item.placemark.coordinate
+                
+                DispatchQueue.main.async {
+                    self.map_view.addAnnotation(annotation)
+                }
+            }
         }
     }
     
+    // Initialize
+    //  1. Check if User Enabled Location
     func checkLocationServices() {
         if CLLocationManager.locationServicesEnabled() {
             // Setup location manager
@@ -129,20 +207,44 @@ class MapsViewController: UIViewController {
         }
     }
     
-    // Only run app when user gives access to location
+    //  2. Set up for User Location
+    func setupLocationManager() {
+        location_manager.delegate = self as CLLocationManagerDelegate
+        location_manager.distanceFilter = kCLLocationAccuracyNearestTenMeters
+        location_manager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    func setupMapView() {
+        map_view.delegate = self
+        map_view.showsUserLocation = true                           // Puts blue dot on map (User Location)
+        map_view.userTrackingMode = .follow
+    }
+    
+    func centerViewOnUserLocation() {
+        if let location = location_manager.location?.coordinate {
+            
+            // Lat + Lon = How far we're zoomed in
+            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: region_in_meters, longitudinalMeters: region_in_meters)
+            map_view.setRegion(region, animated: true)
+        }
+    }
+    
+    //  3. Only run app when user gives access to location
     func checkLocationAuthorization() {
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse:                                      // When App Open, Get located when in use
-            // Do Map Stuff
-            map_view.showsUserLocation = true                           // Puts blue dot on map (User Location)
             centerViewOnUserLocation()
+            setupMapView()
             location_manager.startUpdatingLocation()                    // Calls Delegate method
+            populateNearByPlaces()
+            
             // Makes "Search" request from Places API
-            if let location = location_manager.location?.coordinate {
-                print("------Fetching Data!------")
-                fetchData(latitude: location.latitude, longitude: location.longitude)
-                print("Lat: \(location.latitude), Lon: \(location.longitude)")
-            }
+            print("----CENTERING----")
+//            if let location = location_manager.location?.coordinate {
+//                print("------Fetching Data!------")
+//                fetchData(latitude: location.latitude, longitude: location.longitude)
+//                print("Lat: \(location.latitude), Lon: \(location.longitude)")
+//            }
             break
         case .denied:                                                   // Not allowed, denied once? Pop up won't show up
             // Show alert instructing them how to turn on permission
@@ -159,15 +261,15 @@ class MapsViewController: UIViewController {
 }
 
 extension MapsViewController: CLLocationManagerDelegate {
-    // Do something when location updates
+    // Do something when user moves around the map
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return } // if nil, do nothing
+//        guard let location = locations.last else { return } // if nil, do nothing
         
         // Makes the zoom in stay the position as the user moves
-        let center = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: region_in_meters, longitudinalMeters: region_in_meters)
-        
-        map_view.setRegion(region, animated: true)
+//        let center = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+//        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: region_in_meters, longitudinalMeters: region_in_meters)
+//
+//        map_view.setRegion(region, animated: true)
     }
     
     
@@ -178,6 +280,8 @@ extension MapsViewController: CLLocationManagerDelegate {
     }
 }
 
+// Used for Places API Request
+//  - Shows pins and window when clicked
 extension MapsViewController: MKMapViewDelegate {
     
     // Setting up the Annotation & Pin
