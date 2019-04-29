@@ -69,7 +69,6 @@
                                         </state>
                                         <connections>
                                             <action selector="onSignup:" destination="SGk-4b-4md" eventType="touchUpInside" id="Nct-ys-NgM"/>
-                                            <segue destination="pon-bq-CJq" kind="presentation" identifier="BackToLogin" id="s6M-hc-CaH"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -95,6 +94,7 @@
                         <outlet property="confirmPasswordField" destination="VQZ-pC-alX" id="7Uj-vj-kc2"/>
                         <outlet property="emailField" destination="9DU-wV-fdZ" id="Owj-5c-lf7"/>
                         <outlet property="passwordField" destination="0IJ-tg-Wia" id="s8f-Zf-e8C"/>
+                        <segue destination="pon-bq-CJq" kind="presentation" identifier="BackToLogin" id="WLL-rX-OIQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BE-rr-fRQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
