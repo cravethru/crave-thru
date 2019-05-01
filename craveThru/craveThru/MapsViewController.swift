@@ -246,7 +246,6 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
     func setupMapView() {
         map_view.delegate = self
         map_view.showsUserLocation = true                           // Puts blue dot on map (User Location)
-        map_view.userTrackingMode = .follow
     }
     
     func centerViewOnUserLocation() {

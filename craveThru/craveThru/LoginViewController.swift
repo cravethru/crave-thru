@@ -31,7 +31,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         let emailText = emailField.text!
         let passwordText = passwordField.text!
         
-        if emailText == "test" && passwordText == "test"{
+        if emailText == "" && passwordText == ""{
             self.performSegue(withIdentifier: "LoginSegueue", sender: self)
         }
         
