@@ -175,15 +175,19 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
     // Option 2: Use Apple's Local Search for Restaurants
     func populateNearByPlaces() {
         let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = "Restaurants"
         request.region = self.map_view.region
         
+        //  - Used to store all restaurants within the user location
+        let defaults = UserDefaults.standard
+        var all_restaurants: [MKMapItem] = []
+        
+        //  - Search
+        //      - Restaurants
+        request.naturalLanguageQuery = "Restaurants"
         var search = MKLocalSearch(request: request)
+        
         search.start { (response, error) in
             guard let response = response else { return }
-            
-//            print("Total Restaurants Found: \(response.mapItems.count)")
-//            print(response.mapItems)
             
             // Create Annotations / Pins on Map
             for item in response.mapItems {
@@ -193,20 +197,20 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
                 annotation.title = item.name
                 annotation.coordinate = item.placemark.coordinate
                 
+                all_restaurants.append(item)
+                
                 DispatchQueue.main.async {
                     self.map_view.addAnnotation(annotation)
                 }
             }
         }
         
+        //      - Fast Food
         request.naturalLanguageQuery = "Fast Food"
-        
         search = MKLocalSearch(request: request)
+        
         search.start { (response, error) in
             guard let response = response else { return }
-            
-            //            print("Total Restaurants Found: \(response.mapItems.count)")
-            //            print(response.mapItems)
             
             // Create Annotations / Pins on Map
             for item in response.mapItems {
@@ -216,11 +220,17 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
                 annotation.title = item.name
                 annotation.coordinate = item.placemark.coordinate
                 
+                all_restaurants.append(item)
+                
                 DispatchQueue.main.async {
                     self.map_view.addAnnotation(annotation)
                 }
             }
         }
+        
+        // Store all Restaurant names from:
+        //  - Restaurant & Fast Food
+        defaults.set(all_restaurants, forKey: "restaurant_names")
     }
     
     // Initialize
