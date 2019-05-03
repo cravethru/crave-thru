@@ -28,9 +28,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     }
 
     @IBAction func onLogin(_ sender: Any) {
-        let emailText = emailField.text!
+       self.performSegue(withIdentifier: "LoginSegueue", sender: self)        // let emailText = emailField.text!
         let passwordText = passwordField.text!
         
+
+        Auth.auth().signIn(withEmail: emailText, password: passwordText) {(user, error) in
+            if error != nil{
+                print (error!)
+            }
+            else if let user = Auth.auth().currentUser{
+                if !user.isEmailVerified{
+                    self.verifyError.textColor = UIColor.red
+               }
+                else{
+                   self.verifyError.textColor = UIColor.white
+                    self.performSegue(withIdentifier: "LoginSegueue", sender: self)
+                }
+            }
+       }
         if emailText == "test" && passwordText == "test"{
             self.performSegue(withIdentifier: "LoginSegueue", sender: self)
         }
@@ -49,6 +64,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 }
             }
         }
+
     }
     
     @IBAction func onSignup(_ sender: Any) {

@@ -10,12 +10,27 @@
 import UIKit
 
 class ExpandedViewController: UIViewController {
-
+    
+    
+    
+    @IBOutlet weak var rexName: UILabel!
+    
+    @IBOutlet weak var rexPrice: UILabel!
+    
+    
+    @IBOutlet weak var rexDescription: UILabel!
+    
+    
+    @IBOutlet weak var rexPicture: UIImageView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
     
 
     /*
