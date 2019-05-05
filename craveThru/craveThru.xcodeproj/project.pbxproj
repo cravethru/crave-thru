@@ -147,7 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				1D7F3A3A2256F6920014E62F /* AppDelegate.swift */,
-				28985CE5225B03020038193D /* MapsViewController.swift */,
 				28AFD03F226E398600CEB4A7 /* Restaurant.swift */,
 				1D7F3A412256F6930014E62F /* Assets.xcassets */,
 				1D7F3A432256F6930014E62F /* LaunchScreen.storyboard */,
@@ -164,6 +163,7 @@
 				0B26926A226460E0007C38A4 /* Details.storyboard */,
 				0B0C289B225C05ED00E5B2C9 /* Maps.storyboard */,
 				0BD46CC0225BF9F000D4914C /* LoginViewController.swift */,
+				28985CE5225B03020038193D /* MapsViewController.swift */,
 				0BD46CC2225BFF2700D4914C /* HomeViewController.swift */,
 				0B26926822646048007C38A4 /* ExpandedViewController.swift */,
 				0B26926E2264634E007C38A4 /* ProfileViewController.swift */,
@@ -655,7 +655,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Raymond-Esteybar.craveThru";
+				PRODUCT_BUNDLE_IDENTIFIER = CraveThruMaps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -674,7 +674,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Raymond-Esteybar.craveThru";
+				PRODUCT_BUNDLE_IDENTIFIER = CraveThruMaps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

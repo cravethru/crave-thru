@@ -8,10 +8,13 @@
 
 import UIKit
 import Firebase
+import MapKit
 
 class HomeViewController: UIViewController {
     var db: Firestore!
 
+    let location_manager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +28,34 @@ class HomeViewController: UIViewController {
         Firestore.firestore().settings = settings
         // [END setup]
         db = Firestore.firestore()
-        // Do any additional setup after loading the view.
+        
+        
+        // Testing All Restaurants show
+//        let defaults = UserDefaults.standard
+//        print(defaults.array(forKey: "restaurant_names") ?? "Nothing")
+
+        if CLLocationManager.locationServicesEnabled() {
+            location_manager.requestWhenInUseAuthorization()
+            checkLocationAuthorization()
+        } else {
+            print("NOT ALLOWED LOCATION")
+        }
+        
+        // * Used to Automatically update the default tip from different view
+//        NotificationCenter.default.addObserver(self, selector: #selector(notification_fired(_:)), name: Notification.Name("get_restaurants"), object: nil)
+    }
+    
+    @objc func notification_fired(_ notification: Notification) {
+//        let defaults = UserDefaults.standard
+//        let restaurants: Array = defaults.array(forKey: "restaurants") as! [MKMapItem]
+        
+        print("Got notification! In Home View")
+//
+//        var i = 0
+//        for r in restaurants {
+//            print("\(i)) \(String(describing: r.name))")
+//            i += 1
+//        }
     }
     
     @IBAction func onSaved(_ sender: Any) {
@@ -145,6 +175,35 @@ class HomeViewController: UIViewController {
         
     }
     
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+            case .denied, .restricted, .notDetermined:
+                // Denied: Not allowed, denied once? Pop up won't show up
+                // Restricted: User cannot change app status, Ex: Parent restricts child's location
+                //    - Show alert instructing them how to turn on permission
+                let title = "Location Services Disabled"
+                let message = "Please enable Location Services in Settings > CraveThru > Location > While Using the App."
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+                let settings_action = UIAlertAction(title: "Settings", style: .default) { (UIAlertAction) in
+                    guard let settings_url = URL(string: UIApplication.openSettingsURLString) else { return }
+
+                    if UIApplication.shared.canOpenURL(settings_url) {
+                        UIApplication.shared.open(settings_url, options: [:], completionHandler: { (success) in
+                            print("Settings opened: \(success)")
+                        })
+                    }
+                }
+
+                alert.addAction(settings_action)
+                present(alert, animated: true, completion: nil)
+                break
+            
+            default:
+                break
+        }
+    }
+    
     /*
      // MARK: - Navigation
      
@@ -154,7 +213,4 @@ class HomeViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    
-    
-
 }

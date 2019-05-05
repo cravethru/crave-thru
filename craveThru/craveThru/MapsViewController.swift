@@ -19,24 +19,10 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
     
     let location_manager = CLLocationManager()
     let region_in_meters: Double = 10000
-
-    // Places API
-    let client_id = "UH3KGN3HLTNDN1DIA1EIY0FKN120TC5W2L1H22EFPXMZFHJF"
-    let client_secret = "OQ0F5RZWB53GZSWIKC4YWBTTJ4IDXQPPICLZQEUD3GQITVAA"
-    let food_id = "4d4b7105d754a06374d81259"
-    
-    // All Restaurants around User Location
-    var restaurants = [Restaurant]()
-    
-    // Current Date
-    var current_date: String = ""
+    var all_restaurants: [MKMapItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("Starting Maps")
-        
-        getDate()
         checkLocationServices()
     }
     
@@ -96,130 +82,6 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
             // Create Annotations
             //  - Show restaurants
             self.populateNearByPlaces()
-//            self.fetchData(latitude: latitude, longitude: longitude)
-        }
-    }
-    
-    
-    // Option 1: Places API
-    //  - Requires current date in URL
-    func getDate() {
-        // 1. Setup Date & Calendar
-        let date = Date()
-        let calendar = Calendar.current
-        
-        // 2. Get Date for Places API Request URLs
-        let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: date)
-        let year = components.year
-        let day = components.day
-        var check_month: String = ""
-        
-        // 3. Format month
-        if let unwrapped_month = components.month {
-            if unwrapped_month >= 1 && unwrapped_month <= 9 {
-                check_month = "0\(unwrapped_month)"
-            } else {
-                check_month = "\(unwrapped_month)"
-            }
-        }
-        
-        // 4. Setup Current Date
-        current_date = "\(year!)\(check_month)\(day!)"
-    }
-    
-    //  - Retrieves JSON data
-    func fetchData(latitude: Double, longitude: Double) {
-        // 1. Use 'Search' request URL from Places API
-        let search_url = "https://api.foursquare.com/v2/venues/search?ll=\(latitude),\(longitude)&categoryId=\(food_id)&client_id=\(client_id)&client_secret=\(client_secret)&v=\(current_date)"
-        
-        //  - Format URL
-        guard let url = URL(string: search_url) else { return }
-        
-        // 2. Parses JSON from "Search for Venues" request
-        URLSession.shared.dataTask(with: url) { (data, response, err) in
-            guard let data = data else {return}
-//            let dataAsString = String(data: data, encoding: .utf8)
-//            print (dataAsString)
-            
-            // Remove annotations (pins)
-            let annotations = self.map_view.annotations
-            self.map_view.removeAnnotations(annotations)
-            
-            // - Read JSON -> Store in Dictionary
-            if let json = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                if let unwrapped_response = json["response"] as? [String: Any] {
-                    let venues_json: [[String: Any]] = unwrapped_response["venues"] as! [[String: Any]]
-                    //  - Store:
-                    //      Title
-                    //      Address
-                    //      Coordinate
-                    var counter = 1
-                    self.restaurants.removeAll()
-                    for venue_json in venues_json {
-                        if let venue = Restaurant.from(restaurant: venue_json) {
-                            self.restaurants.append(venue)
-                            print(counter)
-                            counter += 1
-                        }
-                    }
-                }
-            }
-            
-            // 3. Show pins on screen
-            self.map_view.addAnnotations(self.restaurants)
-            
-            print("Restaurants: \(self.restaurants.count)")
-            }.resume()
-    }
-    
-    // Option 2: Use Apple's Local Search for Restaurants
-    func populateNearByPlaces() {
-        let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = "Restaurants"
-        request.region = self.map_view.region
-        
-        var search = MKLocalSearch(request: request)
-        search.start { (response, error) in
-            guard let response = response else { return }
-            
-//            print("Total Restaurants Found: \(response.mapItems.count)")
-//            print(response.mapItems)
-            
-            // Create Annotations / Pins on Map
-            for item in response.mapItems {
-                let annotation = MKPointAnnotation()
-                
-                // Store ea. restaurant's info
-                annotation.title = item.name
-                annotation.coordinate = item.placemark.coordinate
-                
-                DispatchQueue.main.async {
-                    self.map_view.addAnnotation(annotation)
-                }
-            }
-        }
-        
-        request.naturalLanguageQuery = "Fast Food"
-        
-        search = MKLocalSearch(request: request)
-        search.start { (response, error) in
-            guard let response = response else { return }
-            
-            //            print("Total Restaurants Found: \(response.mapItems.count)")
-            //            print(response.mapItems)
-            
-            // Create Annotations / Pins on Map
-            for item in response.mapItems {
-                let annotation = MKPointAnnotation()
-                
-                // Store ea. restaurant's info
-                annotation.title = item.name
-                annotation.coordinate = item.placemark.coordinate
-                
-                DispatchQueue.main.async {
-                    self.map_view.addAnnotation(annotation)
-                }
-            }
         }
     }
     
@@ -229,7 +91,6 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
         if CLLocationManager.locationServicesEnabled() {
             // Setup location manager
             setupLocationManager()
-            checkLocationAuthorization()
         } else {
             // Show alert letting the user know they have to turn this on
             print("Location Services Not enabled")
@@ -243,48 +104,125 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
         location_manager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
+    // 3. Only run app when user gives access to location
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+            case .authorizedAlways, .authorizedWhenInUse:
+                // When App Open, Get located when in use
+                centerViewOnUserLocation()
+                setupMapView()
+                location_manager.startUpdatingLocation()                    // Calls Delegate method
+                populateNearByPlaces()
+                
+                break
+                
+            case .denied, .restricted:
+                // Denied: Not allowed, denied once? Pop up won't show up
+                // Restricted: User cannot change app status, Ex: Parent restricts child's location
+                //  - Show alert instructing them how to turn on permission
+                let title = "Location Services Disabled"
+                let message = "Please enable Location Services in Settings > CraveThru > Location > While Using the App."
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                
+                let settings_action = UIAlertAction(title: "Settings", style: .default) { (UIAlertAction) in
+                    guard let settings_url = URL(string: UIApplication.openSettingsURLString) else { return }
+                    
+                    if UIApplication.shared.canOpenURL(settings_url) {
+                        UIApplication.shared.open(settings_url, options: [:], completionHandler: nil)
+                    }
+                }
+                
+                alert.addAction(settings_action)
+                present(alert, animated: true, completion: nil)
+                break
+            
+            case .notDetermined:
+                location_manager.requestWhenInUseAuthorization()
+                print("Not determined")
+                break
+        }
+    }
+    
     func setupMapView() {
-        map_view.delegate = self
+        map_view.delegate = self as? MKMapViewDelegate
         map_view.showsUserLocation = true                           // Puts blue dot on map (User Location)
-        map_view.userTrackingMode = .follow
     }
     
     func centerViewOnUserLocation() {
         if let location = location_manager.location?.coordinate {
-            
-            // Lat + Lon = How far we're zoomed in
+            // Lat & Lon = How far we're zoomed in
             let region = MKCoordinateRegion.init(center: location, latitudinalMeters: region_in_meters, longitudinalMeters: region_in_meters)
             map_view.setRegion(region, animated: true)
         }
     }
     
-    //  3. Only run app when user gives access to location
-    func checkLocationAuthorization() {
-        switch CLLocationManager.authorizationStatus() {
-        case .authorizedWhenInUse:                                      // When App Open, Get located when in use
-            centerViewOnUserLocation()
-            setupMapView()
-            location_manager.startUpdatingLocation()                    // Calls Delegate method
-            populateNearByPlaces()
-            
-            // Makes "Search" request from Places API
-            print("----CENTERING----")
-//            if let location = location_manager.location?.coordinate {
-//                print("------Fetching Data!------")
-//                fetchData(latitude: location.latitude, longitude: location.longitude)
-//                print("Lat: \(location.latitude), Lon: \(location.longitude)")
-//            }
-            break
-        case .denied:                                                   // Not allowed, denied once? Pop up won't show up
-            // Show alert instructing them how to turn on permission
-            break
-        case .notDetermined:
-            location_manager.requestWhenInUseAuthorization()
-        case.restricted:                                                // User cannot change app status, Ex: Parent restricts child's location
-            // Show an alert letting them know
-            break
-        case.authorizedAlways:                                          // Location is always on when app not and in use
-            break
+    // 4. Use Apple's Local Search for Restaurants
+    func populateNearByPlaces() {
+        let request = MKLocalSearch.Request()
+        request.region = self.map_view.region
+        
+        //  - Used to store all restaurants within the user location
+        let defaults = UserDefaults.standard
+        let categories = ["Restaurants", "Fast Food"]
+        
+        //  - Search
+        //      - Restaurants
+        request.naturalLanguageQuery = "Restaurants"
+        var search = MKLocalSearch(request: request)
+        
+        search.start { (response, error) in
+            guard let response = response else { return }
+            print("Restaurants")
+        
+            //  - Create Annotations on Map
+            for item in response.mapItems {
+                let annotation = MKPointAnnotation()
+                
+                //  - Store ea. restaurant's info
+                annotation.title = item.name
+                annotation.coordinate = item.placemark.coordinate
+                
+                //  - Store Restaurant
+                self.all_restaurants.append(item)
+                print("\(String(describing: item.name))")
+                DispatchQueue.main.async {
+                    self.map_view.addAnnotation(annotation)
+                }
+            }
+        }
+        
+        //      - Fast Food
+        request.naturalLanguageQuery = "Fast Food"
+        search = MKLocalSearch(request: request)
+
+        search.start { (response, error) in
+            guard let response = response else { return }
+            print("Fast Food")
+            //  - Create Annotations on Map
+            for item in response.mapItems {
+                let annotation = MKPointAnnotation()
+
+                //  - Store ea. restaurant's info
+                annotation.title = item.name
+                annotation.coordinate = item.placemark.coordinate
+
+                //  - Store Restaurant
+                self.all_restaurants.append(item)
+                print("\(String(describing: item.name))")
+
+                DispatchQueue.main.async {
+                    self.map_view.addAnnotation(annotation)
+                }
+            }
+//
+//            // Store all Restaurant names from:
+//            //  - Restaurant & Fast Food
+//            defaults.set(Array(self.all_restaurants), forKey: "restaurant")
+//
+//            //  - Force UserDefaults to save
+//            defaults.synchronize()
+//
+//            //                NotificationCenter.default.post(name: Notification.Name("get_restaurants"), object: nil, userInfo: nil)
         }
     }
 }
@@ -299,7 +237,7 @@ extension MapsViewController: CLLocationManagerDelegate {
 //        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: region_in_meters, longitudinalMeters: region_in_meters)
 //
 //        map_view.setRegion(region, animated: true)
-        populateNearByPlaces()
+//        populateNearByPlaces()
     }
     
     
@@ -307,36 +245,5 @@ extension MapsViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         // When authorization changes
         checkLocationAuthorization()
-    }
-}
-
-// Used for Places API Request
-//  - Shows pins and window when clicked
-extension MapsViewController: MKMapViewDelegate {
-    
-    // Setting up the Annotation & Pin
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let annotation = annotation as? Restaurant {
-            let identifier = "pin"
-            var view: MKPinAnnotationView
-            
-            // Pinning
-            //  - if   -> Already Created the view? Reuse Annotation View
-            //  - else -> Create a new Annotation View
-            if let dequeued_view = map_view.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
-                dequeued_view.annotation = annotation
-                view = dequeued_view
-            } else {
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view.canShowCallout = true  // Decides to show (or not) the window
-                view.animatesDrop = true    // Shows pin dropping from the top of screen
-                view.calloutOffset = CGPoint(x: -5, y: 5)   // Where to place bubble
-                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView    // i button -> More info
-            }
-            
-            return view
-        }
-        
-        return nil
     }
 }
