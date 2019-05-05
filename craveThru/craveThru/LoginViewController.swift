@@ -32,7 +32,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         let passwordText = passwordField.text!
         
         if emailText == "" && passwordText == ""{
-            self.performSegue(withIdentifier: "LoginSegueue", sender: self)
+            self.performSegue(withIdentifier: "LoginSegue", sender: self)
         }
         
         Auth.auth().signIn(withEmail: emailText, password: passwordText) {(user, error) in
@@ -45,7 +45,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 }
                 else{
                     self.verifyError.textColor = UIColor.white
-                    self.performSegue(withIdentifier: "LoginSegueue", sender: self)
+                    self.performSegue(withIdentifier: "LoginSegue", sender: self)
                 }
             }
         }

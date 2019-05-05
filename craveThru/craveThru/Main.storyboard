@@ -100,7 +100,7 @@
                         <outlet property="emailField" destination="ghk-GO-Oku" id="0Li-5T-kma"/>
                         <outlet property="passwordField" destination="UuX-GZ-bXG" id="Cmq-NJ-nsc"/>
                         <outlet property="verifyError" destination="NFH-Xd-Ngh" id="Vcz-3Q-Nqz"/>
-                        <segue destination="7GN-R6-IeC" kind="presentation" identifier="LoginSegueue" id="7I3-sr-rdo"/>
+                        <segue destination="7GN-R6-IeC" kind="presentation" identifier="LoginSegue" id="7I3-sr-rdo"/>
                         <segue destination="dvP-5G-UPG" kind="presentation" identifier="SignupSegueue" id="k5X-pj-5FY"/>
                     </connections>
                 </viewController>
@@ -116,10 +116,10 @@
             </objects>
             <point key="canvasLocation" x="-125" y="521"/>
         </scene>
-        <!--Maps-->
+        <!--Home-->
         <scene sceneID="Ybj-Xa-VjT">
             <objects>
-                <viewControllerPlaceholder storyboardName="Maps" id="7GN-R6-IeC" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Home" id="7GN-R6-IeC" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LbH-aD-up7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="696" y="38"/>
