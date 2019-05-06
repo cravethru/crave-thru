@@ -14,8 +14,6 @@
 		0B26926B226460E0007C38A4 /* Details.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B26926A226460E0007C38A4 /* Details.storyboard */; };
 		0B26926D2264633D007C38A4 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B26926C2264633D007C38A4 /* Profile.storyboard */; };
 		0B26926F2264634E007C38A4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B26926E2264634E007C38A4 /* ProfileViewController.swift */; };
-		0B269271226463CB007C38A4 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B269270226463CB007C38A4 /* ListViewController.swift */; };
-		0B269273226463E5007C38A4 /* List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B269272226463E5007C38A4 /* List.storyboard */; };
 		0BD46CC1225BF9F000D4914C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD46CC0225BF9F000D4914C /* LoginViewController.swift */; };
 		0BD46CC3225BFF2700D4914C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD46CC2225BFF2700D4914C /* HomeViewController.swift */; };
 		1D502A6B225FD23D007CDB1E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */; };
@@ -28,6 +26,9 @@
 		1D7F3A452256F6930014E62F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D7F3A432256F6930014E62F /* LaunchScreen.storyboard */; };
 		1D7F3A502256F6940014E62F /* craveThruTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7F3A4F2256F6940014E62F /* craveThruTests.swift */; };
 		1D7F3A5B2256F6940014E62F /* craveThruUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7F3A5A2256F6940014E62F /* craveThruUITests.swift */; };
+		1DA34CF3227E9FD200C8ACEF /* LocationOffScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DA34CF2227E9FD200C8ACEF /* LocationOffScreen.storyboard */; };
+		1DA34CF5227EA1D200C8ACEF /* LocationOffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA34CF4227EA1D200C8ACEF /* LocationOffViewController.swift */; };
+		1DA34CF7227FB8F900C8ACEF /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA34CF6227FB8F900C8ACEF /* MenuTableViewCell.swift */; };
 		28985CE6225B03020038193D /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28985CE5225B03020038193D /* MapsViewController.swift */; };
 		28AFD040226E398600CEB4A7 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AFD03F226E398600CEB4A7 /* Restaurant.swift */; };
 		9043A13A7785D2E026328B76 /* Pods_craveThru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0910F8E83EDA207FE014D928 /* Pods_craveThru.framework */; };
@@ -61,8 +62,6 @@
 		0B26926A226460E0007C38A4 /* Details.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Details.storyboard; sourceTree = "<group>"; };
 		0B26926C2264633D007C38A4 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		0B26926E2264634E007C38A4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		0B269270226463CB007C38A4 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
-		0B269272226463E5007C38A4 /* List.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = List.storyboard; sourceTree = "<group>"; };
 		0BD46CC0225BF9F000D4914C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0BD46CC2225BFF2700D4914C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -81,6 +80,9 @@
 		1D7F3A562256F6940014E62F /* craveThruUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = craveThruUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D7F3A5A2256F6940014E62F /* craveThruUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = craveThruUITests.swift; sourceTree = "<group>"; };
 		1D7F3A5C2256F6940014E62F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1DA34CF2227E9FD200C8ACEF /* LocationOffScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationOffScreen.storyboard; sourceTree = "<group>"; };
+		1DA34CF4227EA1D200C8ACEF /* LocationOffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationOffViewController.swift; sourceTree = "<group>"; };
+		1DA34CF6227FB8F900C8ACEF /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		28985CE5225B03020038193D /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		28AFD03F226E398600CEB4A7 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		3DC4B7447401481825AA8033 /* Pods-craveThruUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-craveThruUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-craveThruUITests/Pods-craveThruUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,21 +155,22 @@
 				1D7F3A462256F6930014E62F /* Info.plist */,
 				0B0C2891225C029200E5B2C9 /* Main.storyboard */,
 				1D502A6C2260196F007CDB1E /* Signup.storyboard */,
+				1DA34CF2227E9FD200C8ACEF /* LocationOffScreen.storyboard */,
+				1DA34CF4227EA1D200C8ACEF /* LocationOffViewController.swift */,
 				1D502A6E22601A71007CDB1E /* SignupViewController.swift */,
 				1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */,
 				0B0C2893225C03EF00E5B2C9 /* Home.storyboard */,
-				0B269272226463E5007C38A4 /* List.storyboard */,
 				0B26926C2264633D007C38A4 /* Profile.storyboard */,
 				1D5DBFC12267D3600096B455 /* ProfileFavoritesTableViewCell.swift */,
 				1D502A70226549EC007CDB1E /* UserProfileFavoritesCollectionViewCell.swift */,
 				0B26926A226460E0007C38A4 /* Details.storyboard */,
+				1DA34CF6227FB8F900C8ACEF /* MenuTableViewCell.swift */,
 				0B0C289B225C05ED00E5B2C9 /* Maps.storyboard */,
 				0BD46CC0225BF9F000D4914C /* LoginViewController.swift */,
 				28985CE5225B03020038193D /* MapsViewController.swift */,
 				0BD46CC2225BFF2700D4914C /* HomeViewController.swift */,
 				0B26926822646048007C38A4 /* ExpandedViewController.swift */,
 				0B26926E2264634E007C38A4 /* ProfileViewController.swift */,
-				0B269270226463CB007C38A4 /* ListViewController.swift */,
 			);
 			path = craveThru;
 			sourceTree = "<group>";
@@ -323,12 +326,12 @@
 			files = (
 				1D502A6D2260196F007CDB1E /* Signup.storyboard in Resources */,
 				0B0C2892225C029200E5B2C9 /* Main.storyboard in Resources */,
-				0B269273226463E5007C38A4 /* List.storyboard in Resources */,
 				0B0C2894225C03EF00E5B2C9 /* Home.storyboard in Resources */,
 				0B0C289C225C05ED00E5B2C9 /* Maps.storyboard in Resources */,
 				1D7F3A452256F6930014E62F /* LaunchScreen.storyboard in Resources */,
 				1D7F3A422256F6930014E62F /* Assets.xcassets in Resources */,
 				0B26926D2264633D007C38A4 /* Profile.storyboard in Resources */,
+				1DA34CF3227E9FD200C8ACEF /* LocationOffScreen.storyboard in Resources */,
 				1D502A6B225FD23D007CDB1E /* GoogleService-Info.plist in Resources */,
 				0B26926B226460E0007C38A4 /* Details.storyboard in Resources */,
 			);
@@ -472,13 +475,14 @@
 			files = (
 				1D502A71226549EC007CDB1E /* UserProfileFavoritesCollectionViewCell.swift in Sources */,
 				0BD46CC3225BFF2700D4914C /* HomeViewController.swift in Sources */,
+				1DA34CF7227FB8F900C8ACEF /* MenuTableViewCell.swift in Sources */,
 				0BD46CC1225BF9F000D4914C /* LoginViewController.swift in Sources */,
 				1D5DBFC22267D3600096B455 /* ProfileFavoritesTableViewCell.swift in Sources */,
 				1D502A6F22601A71007CDB1E /* SignupViewController.swift in Sources */,
+				1DA34CF5227EA1D200C8ACEF /* LocationOffViewController.swift in Sources */,
 				0B26926922646048007C38A4 /* ExpandedViewController.swift in Sources */,
 				0B26926F2264634E007C38A4 /* ProfileViewController.swift in Sources */,
 				28985CE6225B03020038193D /* MapsViewController.swift in Sources */,
-				0B269271226463CB007C38A4 /* ListViewController.swift in Sources */,
 				1D7F3A3B2256F6920014E62F /* AppDelegate.swift in Sources */,
 				28AFD040226E398600CEB4A7 /* Restaurant.swift in Sources */,
 			);
