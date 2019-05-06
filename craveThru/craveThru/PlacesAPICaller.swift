@@ -110,18 +110,12 @@ class PlacesAPICaller {
         
         //  - Format URL
         guard let url = URL(string: menu_url) else { return [:] }
-        
-        print("--Printing Menu--")
-        
+                
         // 2. Parses JSON from "Search for Venues" request
         URLSession.shared.dataTask(with: url) { (data, response, err) in
             guard let data = data else {return}
-//            let dataAsString = String(data: data, encoding: .utf8)
-//            print (dataAsString!)
             
-            // - Read JSON -> Store in Dictionary
             do {
-                //here dataResponse received from a network request
                 let decoder = JSONDecoder()
 
                 let model = try decoder.decode(Menu.self, from: data)
