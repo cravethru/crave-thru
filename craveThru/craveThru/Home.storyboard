@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xgB-c5-MQ0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xgB-c5-MQ0">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -49,9 +49,12 @@
                                 <rect key="frame" x="364" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Map"/>
+                                <connections>
+                                    <action selector="mapsButton:" destination="29T-20-XsV" eventType="touchUpInside" id="NcK-wD-u1Q"/>
+                                </connections>
                             </button>
                             <connections>
-                                <segue destination="0R7-cZ-VXx" kind="presentation" id="DYG-t3-TpF"/>
+                                <segue destination="0R7-cZ-VXx" kind="show" identifier="MapsSegue" id="hdY-6X-rNV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

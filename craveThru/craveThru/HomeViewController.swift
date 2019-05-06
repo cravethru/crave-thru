@@ -35,14 +35,13 @@ class HomeViewController: UIViewController {
 //        print(defaults.array(forKey: "restaurant_names") ?? "Nothing")
 
         if CLLocationManager.locationServicesEnabled() {
-            location_manager.requestWhenInUseAuthorization()
             checkLocationAuthorization()
         } else {
             print("NOT ALLOWED LOCATION")
         }
         
         // * Used to Automatically update the default tip from different view
-//        NotificationCenter.default.addObserver(self, selector: #selector(notification_fired(_:)), name: Notification.Name("get_restaurants"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notification_fired(_:)), name: Notification.Name("get_restaurants"), object: nil)
     }
     
     @objc func notification_fired(_ notification: Notification) {
@@ -177,7 +176,7 @@ class HomeViewController: UIViewController {
     
     func checkLocationAuthorization() {
         switch CLLocationManager.authorizationStatus() {
-            case .denied, .restricted, .notDetermined:
+            case .denied, .restricted:
                 // Denied: Not allowed, denied once? Pop up won't show up
                 // Restricted: User cannot change app status, Ex: Parent restricts child's location
                 //    - Show alert instructing them how to turn on permission
@@ -199,6 +198,10 @@ class HomeViewController: UIViewController {
                 present(alert, animated: true, completion: nil)
                 break
             
+            case .notDetermined:
+                location_manager.requestWhenInUseAuthorization()
+                break
+            
             default:
                 break
         }
@@ -208,6 +211,9 @@ class HomeViewController: UIViewController {
         performSegue(withIdentifier: "DetailSegue", sender: self)
     }
     
+    @IBAction func mapsButton(_ sender: Any) {
+        performSegue(withIdentifier: "MapsSegue", sender: self)
+    }
     
     /*
      // MARK: - Navigation

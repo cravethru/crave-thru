@@ -50,7 +50,6 @@
                     <connections>
                         <outlet property="map_view" destination="Ht0-5q-3gW" id="c6b-E4-ZxT"/>
                         <outlet property="searchDisplayController" destination="RSP-BY-ipk" id="h0Z-Ab-BsG"/>
-                        <segue destination="sBf-GH-7j4" kind="presentation" identifier="Maps" id="Jkd-5b-uua"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LYI-Xp-EkF" sceneMemberID="firstResponder"/>
@@ -64,14 +63,6 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="4436" y="37.331334332833585"/>
-        </scene>
-        <!--Home-->
-        <scene sceneID="f6b-fO-g42">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Home" id="sBf-GH-7j4" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YaY-fX-AIj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5308" y="-2"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2ky-lU-Q8L">
