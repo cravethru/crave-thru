@@ -24,6 +24,7 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         checkLocationServices()
+        PlacesAPICaller.getDate()
     }
     
     // Searches a Location
@@ -72,6 +73,8 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
             let latitude = response.boundingRegion.center.latitude
             let longitude = response.boundingRegion.center.longitude
             let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            
+            print("Latitude: \(latitude) Longitude: \(longitude)")
             
             // Zoom in on annotation
             let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1) // How much we want to be zoomed in at that coordinate
@@ -162,59 +165,48 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
         request.region = self.map_view.region
         
         //  - Used to store all restaurants within the user location
-        let defaults = UserDefaults.standard
+//        let defaults = UserDefaults.standard
         let categories = ["Restaurants", "Fast Food"]
         
         //  - Search
-        //      - Restaurants
-        request.naturalLanguageQuery = "Restaurants"
-        var search = MKLocalSearch(request: request)
-        
-        search.start { (response, error) in
-            guard let response = response else { return }
-            print("Restaurants")
-        
-            //  - Create Annotations on Map
-            for item in response.mapItems {
-                let annotation = MKPointAnnotation()
+        for category in categories {
+            request.naturalLanguageQuery = category
+            let search = MKLocalSearch(request: request)
+            
+//            print("\n\n\(category)")
+            
+            search.start { (response, error) in
+                guard let response = response else { return }
+                print(category)
                 
-                //  - Store ea. restaurant's info
-                annotation.title = item.name
-                annotation.coordinate = item.placemark.coordinate
+                var counter = 1
                 
-                //  - Store Restaurant
-                self.all_restaurants.append(item)
-                print("\(String(describing: item.name))")
-                DispatchQueue.main.async {
-                    self.map_view.addAnnotation(annotation)
+                //  - Create Annotations on Map
+                for item in response.mapItems {
+                    let annotation = MKPointAnnotation()
+                    
+                    //  - Store ea. restaurant's info
+                    annotation.title = item.name
+                    annotation.coordinate = item.placemark.coordinate
+                    
+//                    print("\t\(counter)) \(String(describing: item.name))")
+                    
+                    counter += 1
+                    
+                    //  - Store Restaurant
+                    self.all_restaurants.append(item)
+                    DispatchQueue.main.async {
+                        self.map_view.addAnnotation(annotation)
+                    }
                 }
             }
         }
         
-        //      - Fast Food
-        request.naturalLanguageQuery = "Fast Food"
-        search = MKLocalSearch(request: request)
-
-        search.start { (response, error) in
-            guard let response = response else { return }
-            print("Fast Food")
-            //  - Create Annotations on Map
-            for item in response.mapItems {
-                let annotation = MKPointAnnotation()
-
-                //  - Store ea. restaurant's info
-                annotation.title = item.name
-                annotation.coordinate = item.placemark.coordinate
-
-                //  - Store Restaurant
-                self.all_restaurants.append(item)
-                print("\(String(describing: item.name))")
-
-                DispatchQueue.main.async {
-                    self.map_view.addAnnotation(annotation)
-                }
-            }
-//
+//        let kfc_venue_id = "4f32039619833175d609c7e4"
+        let kfc_venue_id = "4f32039619833175d609c7e4"
+        let menu = PlacesAPICaller.getMenu(venue_id: kfc_venue_id)
+//        PlacesAPICaller.printMenu(entries: menu)
+        
 //            // Store all Restaurant names from:
 //            //  - Restaurant & Fast Food
 //            defaults.set(Array(self.all_restaurants), forKey: "restaurant")
@@ -222,8 +214,8 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
 //            //  - Force UserDefaults to save
 //            defaults.synchronize()
 //
-//            //                NotificationCenter.default.post(name: Notification.Name("get_restaurants"), object: nil, userInfo: nil)
-        }
+//            NotificationCenter.default.post(name: Notification.Name("get_restaurants"), object: nil, userInfo: nil)
+//        }
     }
 }
 
@@ -239,7 +231,6 @@ extension MapsViewController: CLLocationManagerDelegate {
 //        map_view.setRegion(region, animated: true)
 //        populateNearByPlaces()
     }
-    
     
     // When user clicks allow, it immediately sets up the user's location
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

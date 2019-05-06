@@ -42,7 +42,7 @@ class HomeViewController: UIViewController {
         }
         
         // * Used to Automatically update the default tip from different view
-//        NotificationCenter.default.addObserver(self, selector: #selector(notification_fired(_:)), name: Notification.Name("get_restaurants"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notification_fired(_:)), name: Notification.Name("get_restaurants"), object: nil)
     }
     
     @objc func notification_fired(_ notification: Notification) {
