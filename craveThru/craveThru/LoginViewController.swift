@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 import Firebase
 
 class LoginViewController: UIViewController, UITextFieldDelegate{
@@ -15,6 +16,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     
     @IBOutlet weak var verifyError: UILabel!
     
+    let locationManager = CLLocationManager()
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //*Underlining text fields*
@@ -24,11 +28,44 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         //*changing placeholder text color to dark gray*
         emailField.attributedPlaceholder = NSAttributedString(string: "E-mail", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         
-         passwordField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        passwordField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        
+        
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        if CLLocationManager.locationServicesEnabled() {
+//            switch CLLocationManager.authorizationStatus() {
+//            case .notDetermined, .restricted, .denied:
+//                locationManager.requestWhenInUseAuthorization()
+//                locationForce()
+//                break
+//            case .authorizedAlways, .authorizedWhenInUse:
+//                print("Access")
+//                break
+//            }
+//        }else{
+//            locationManager.requestWhenInUseAuthorization()
+//            self.performSegue(withIdentifier: "LocationOffSegue", sender: self)
+//            print ("segue")
+//        }
+//    }
 
+//    func locationForce() -> Void{
+//        if CLLocationManager.locationServicesEnabled() {
+//            switch CLLocationManager.authorizationStatus() {
+//            case .notDetermined, .restricted, .denied:
+//                self.performSegue(withIdentifier: "LocationOffSegue", sender: self)
+//                print ("segue")
+//                break
+//            case .authorizedAlways, .authorizedWhenInUse:
+//                return
+//            }
+//        }
+//    }
+    
     @IBAction func onLogin(_ sender: Any) {
-       self.performSegue(withIdentifier: "LoginSegueue", sender: self)        // let emailText = emailField.text!
+        let emailText = emailField.text!
         let passwordText = passwordField.text!
         
         if emailText == "" && passwordText == ""{
