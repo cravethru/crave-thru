@@ -27,6 +27,9 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
         PlacesAPICaller.getDate()
     }
     
+    @IBAction func backButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     // Searches a Location
     //  - Displays Search Bar
     @IBAction func searchButton(_ sender: Any) {
