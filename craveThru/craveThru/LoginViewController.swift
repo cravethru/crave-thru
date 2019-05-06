@@ -28,7 +28,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     }
 
     @IBAction func onLogin(_ sender: Any) {
-        let emailText = emailField.text!
+       self.performSegue(withIdentifier: "LoginSegueue", sender: self)        // let emailText = emailField.text!
         let passwordText = passwordField.text!
         
         if emailText == "" && passwordText == ""{
@@ -49,6 +49,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 }
             }
         }
+
     }
     
     @IBAction func onSignup(_ sender: Any) {
