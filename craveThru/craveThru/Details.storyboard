@@ -39,15 +39,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="BfA-IU-3N7">
-                                                <rect key="frame" x="0.0" y="0.0" width="415" height="560"/>
+                                                <rect key="frame" x="0.0" y="-45" width="415" height="605"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <gestureRecognizers/>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyn-2V-e9A">
-                                                <rect key="frame" x="8" y="52" width="50" height="50"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="icon-6 copy"/>
-                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance (miles/km), City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2Z-KS-6Pe">
                                                 <rect key="frame" x="8" y="618" width="218" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -63,7 +58,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lRi-bB-iGB">
-                                                <rect key="frame" x="0.0" y="676" width="415" height="524"/>
+                                                <rect key="frame" x="0.0" y="676" width="415" height="472"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
@@ -124,28 +119,33 @@
                                                 <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Guacomole" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIx-MQ-p0A">
-                                                <rect key="frame" x="154" y="0.0" width="107" height="44"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Guacomole" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0P0-Rd-9DT">
                                                 <rect key="frame" x="154" y="1156" width="107" height="44"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Guacomole" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIx-MQ-p0A">
+                                                <rect key="frame" x="155" y="-45" width="107" height="44"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyn-2V-e9A">
+                                                <rect key="frame" x="8" y="52" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="icon-6 copy"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="iIx-MQ-p0A" firstAttribute="centerX" secondItem="IeM-j3-Uxn" secondAttribute="centerX" id="CdH-76-Ah1"/>
-                                            <constraint firstItem="0P0-Rd-9DT" firstAttribute="centerX" secondItem="IeM-j3-Uxn" secondAttribute="centerX" id="MvB-Kd-rLJ"/>
-                                            <constraint firstItem="InX-dl-jUb" firstAttribute="top" secondItem="iIx-MQ-p0A" secondAttribute="bottom" constant="434" id="Q6G-pv-6mx"/>
-                                            <constraint firstItem="InX-dl-jUb" firstAttribute="centerX" secondItem="IeM-j3-Uxn" secondAttribute="centerX" id="VMM-cx-8ri"/>
-                                            <constraint firstItem="iIx-MQ-p0A" firstAttribute="top" secondItem="IeM-j3-Uxn" secondAttribute="top" id="gK8-hU-RDJ"/>
-                                            <constraint firstItem="0P0-Rd-9DT" firstAttribute="top" secondItem="InX-dl-jUb" secondAttribute="bottom" constant="634" id="ofC-N6-Cpe"/>
-                                            <constraint firstAttribute="bottom" secondItem="0P0-Rd-9DT" secondAttribute="bottom" id="rmP-bf-DMD"/>
+                                            <constraint firstItem="InX-dl-jUb" firstAttribute="centerX" secondItem="IeM-j3-Uxn" secondAttribute="centerX" id="0Lo-t8-ITd"/>
+                                            <constraint firstItem="0P0-Rd-9DT" firstAttribute="centerX" secondItem="IeM-j3-Uxn" secondAttribute="centerX" id="LFo-MV-35B"/>
+                                            <constraint firstAttribute="bottom" secondItem="0P0-Rd-9DT" secondAttribute="bottom" id="RO6-zZ-TkU"/>
+                                            <constraint firstItem="iIx-MQ-p0A" firstAttribute="centerX" secondItem="IeM-j3-Uxn" secondAttribute="centerX" id="dv4-5E-Uoc"/>
+                                            <constraint firstItem="iIx-MQ-p0A" firstAttribute="top" secondItem="IeM-j3-Uxn" secondAttribute="top" constant="-45" id="gF9-wH-Srn"/>
+                                            <constraint firstItem="0P0-Rd-9DT" firstAttribute="top" secondItem="InX-dl-jUb" secondAttribute="bottom" constant="634" id="nrf-jH-4TX"/>
+                                            <constraint firstItem="InX-dl-jUb" firstAttribute="top" secondItem="iIx-MQ-p0A" secondAttribute="bottom" constant="479" id="zMA-pe-JH1"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -175,7 +175,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zwh-sg-O0p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4137.68115942029" y="762.72321428571422"/>
+            <point key="canvasLocation" x="4192.753623188406" y="667.63392857142856"/>
         </scene>
     </scenes>
     <resources>
