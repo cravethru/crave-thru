@@ -204,6 +204,11 @@ class HomeViewController: UIViewController {
         }
     }
     
+    @IBAction func detailButton(_ sender: Any) {
+        performSegue(withIdentifier: "DetailSegue", sender: self)
+    }
+    
+    
     /*
      // MARK: - Navigation
      

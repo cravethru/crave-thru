@@ -12,6 +12,7 @@ import Firebase
 class SignupViewController: UIViewController, UITextFieldDelegate {
     var db: Firestore!
     
+    @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var confirmPasswordField: UITextField!
@@ -26,11 +27,14 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         db = Firestore.firestore()
         
         //*Underlining text fields*
+        usernameField.underlined()
         emailField.underlined()
         passwordField.underlined()
         confirmPasswordField.underlined()
         
         //*changing placeholder text color to dark gray*
+        usernameField.attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        
         emailField.attributedPlaceholder = NSAttributedString(string: "E-mail", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         
         passwordField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
@@ -41,6 +45,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onSignup(_ sender: Any) {
+        let usernameText = usernameField.text!
         let emailText =  emailField.text!
         let passwordText = passwordField.text!
         let confirmPasswordText = confirmPasswordField.text!
@@ -59,7 +64,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                         let date = addUser.metadata.creationDate
                         
                         //Adding sign up information to database
-                        self.addUserToDatabase(uid: uid, email: emailText, createdDate: date)
+                        self.addUserToDatabase(uid: uid, username: usernameText, email: emailText, createdDate: date)
                     }
                     
                     
@@ -76,12 +81,13 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     }
     
     //Adding sign up information to database
-    func addUserToDatabase(uid: String, email: String, createdDate: Date?) -> Void{
+    func addUserToDatabase(uid: String, username: String, email: String, createdDate: Date?) -> Void{
         let dateString = timestampToString(date: createdDate!)
         
         db.collection("users").document(uid).setData([
+            "email": email,
             "creationDate": dateString,
-            "username": email.prefix(5),
+            "username": username,
             "numCities": 0
         ]) {err in
             if let err = err {
