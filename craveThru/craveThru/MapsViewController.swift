@@ -207,7 +207,14 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
         
 //        let kfc_venue_id = "4f32039619833175d609c7e4"
         let kfc_venue_id = "4f32039619833175d609c7e4"
-        let menu = PlacesAPICaller.getMenu(venue_id: kfc_venue_id)
+        PlacesAPICaller.getMenu(venue_id: kfc_venue_id, completion: { finished, menu in
+            if finished {
+                print("Success")
+//                print(menu.response.menu.menus.items[0].name)
+                PlacesAPICaller.printMenu(menu: menu)
+            }
+        })
+//        print(menu.response.menu.menus.items[0].name)
 //        PlacesAPICaller.printMenu(entries: menu)
         
 //            // Store all Restaurant names from:

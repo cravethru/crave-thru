@@ -40,7 +40,7 @@
                         <viewLayoutGuide key="safeArea" id="it5-LC-YcC"/>
                     </view>
                     <navigationItem key="navigationItem" id="sP5-6o-bKa">
-                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="7gf-0g-HtZ">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="7gf-0g-HtZ">
                             <connections>
                                 <action selector="backButton:" destination="u4N-hY-adh" id="Fv0-V1-7X6"/>
                             </connections>
