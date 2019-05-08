@@ -216,6 +216,7 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
                 print("YOU FAILURE")
             }
         })
+        print("HELLO")
 //        print(menu.response.menu.menus.items[0].name)
 //        PlacesAPICaller.printMenu(entries: menu)
         
