@@ -13,7 +13,6 @@ target 'craveThru' do
   pod "Firebase/Auth"
   pod "Firebase/Firestore"
   pod "iCarousel", "~> 1.8"
-  pod "Koloda"
 
   target 'craveThruTests' do
     inherit! :search_paths

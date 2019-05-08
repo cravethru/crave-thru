@@ -9,20 +9,14 @@
 import UIKit
 import Firebase
 import MapKit
-import Koloda
 
 class HomeViewController: UIViewController {
     var db: Firestore!
 
     let location_manager = CLLocationManager()
     
-    @IBOutlet weak var kolodaView: KolodaView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        kolodaView.dataSource = self as! KolodaViewDataSource
-        kolodaView.delegate = self as! KolodaViewDelegate
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
         let image = UIImage(named: "logoColor.png")
@@ -220,31 +214,14 @@ class HomeViewController: UIViewController {
     @IBAction func mapsButton(_ sender: Any) {
         performSegue(withIdentifier: "MapsSegue", sender: self)
     }
-}
-extension HomeViewController: KolodaViewDelegate {
-    func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-        koloda.reloadData()
-    }
     
-    func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
-        UIApplication.shared.openURL(URL(string: "https://yalantis.com/")!)
-    }
-}
-extension HomeViewController: KolodaViewDataSource {
-    
-    func kolodaNumberOfCards(_ koloda:KolodaView) -> Int {
-        return images.count
-    }
-    
-    func kolodaSpeedThatCardShouldDrag(_ koloda: KolodaView) -> DragSpeed {
-        return .fast
-    }
-    
-    func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
-        return UIImageView(image: images[index])
-    }
-    
-    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
-        return Bundle.main.loadNibNamed("OverlayView", owner: self, options: nil)[0] as? OverlayView
-    }
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
 }
