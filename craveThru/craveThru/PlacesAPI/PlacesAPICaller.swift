@@ -63,21 +63,41 @@ class PlacesAPICaller {
             
             do {
                 let decoder = JSONDecoder()
-
-                var menu : Menu = Menu()
                 
-                let check_menu = try decoder.decode(NoMenu.self, from: data)
+                print("Checking Menu")
+                let menu = try decoder.decode(Menu.self, from: data)
                 
                 // Ensures that the restaurant contains a menu
-                let is_menu_available = check_menu.response.menu.menus.count > 0
+                let is_menu_available = menu.response.menu.menus.count > 0
                 
-                print(check_menu.response.menu.menus.count)
+                print("# of menus: \(menu.response.menu.menus.count)")
+                
                 if is_menu_available {
-                    menu = try decoder.decode(Menu.self, from: data)
                     completion(true, menu)
                 } else {
                     completion(false, menu)
                 }
+
+//                let decoder = JSONDecoder()
+//
+//                var menu : Menu = Menu()
+//
+//                print("Checking Menu")
+//                let check_menu = try decoder.decode(NoMenu.self, from: data)
+//
+//                // Ensures that the restaurant contains a menu
+//                let is_menu_available = check_menu.response.menu.menus.count > 0
+//
+//                print("# of menus: \(check_menu.response.menu.menus.count)")
+//
+//                if is_menu_available {
+//                    print("Getting Actual Menu")
+//                    menu = try decoder.decode(Menu.self, from: data)
+//                    print("Done decoding")
+//                    completion(true, menu)
+//                } else {
+//                    completion(false, menu)
+//                }
             } catch let parsingError {
                 print("Error", parsingError)
             }
@@ -87,11 +107,12 @@ class PlacesAPICaller {
     class func printMenu(menu : Menu) {
         let menus = menu.response.menu.menus.items
         
-        for m in menus {
+        for m in menus! {
             print("Name of Menu: \(m.name)")
             
             let sections = m.entries.items
-            for s in sections {
+            print(sections!.count)
+            for s in sections! {
                 print("\t\(s.name)")
                 
                 var counter = 1
