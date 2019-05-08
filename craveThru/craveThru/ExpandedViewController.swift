@@ -33,9 +33,6 @@ class ExpandedViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    @IBAction func backButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
     
     @objc func respondToSwipeGestureRight() {
         if currentImage == 0 {
