@@ -176,11 +176,9 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
             request.naturalLanguageQuery = category
             let search = MKLocalSearch(request: request)
             
-//            print("\n\n\(category)")
-            
             search.start { (response, error) in
                 guard let response = response else { return }
-                print(category)
+//                print(category)
                 
                 var counter = 1
                 
@@ -206,12 +204,15 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
         }
         
 //        let kfc_venue_id = "4f32039619833175d609c7e4"
-        let kfc_venue_id = "4f32039619833175d609c7e4"
-        PlacesAPICaller.getMenu(venue_id: kfc_venue_id, completion: { finished, menu in
+//        let subway_id = "4f32039619833175d609c7e4" // It's KFC
+        let subway_id = "50bd3985e4b0e286cdea0b6a"
+        PlacesAPICaller.getMenu(venue_id: subway_id, completion: { finished, menu in
             if finished {
                 print("Success")
-//                print(menu.response.menu.menus.items[0].name)
+                print(menu.response.menu.menus.items[0].name)
                 PlacesAPICaller.printMenu(menu: menu)
+            } else {
+                print("YOU FAILURE")
             }
         })
 //        print(menu.response.menu.menus.items[0].name)

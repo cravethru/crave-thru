@@ -51,23 +51,29 @@ class PlacesAPICaller {
         current_date = "\(year!)\(formatted_month)\(formatted_day)"
     }
     
-    
-    
     class func getMenu(venue_id : String, completion: @escaping (Bool, Menu) -> Void) {
         let menu_url = "https://api.foursquare.com/v2/venues/\(venue_id)/menu?client_id=\(client_id)&client_secret=\(client_secret)&v=\(current_date)"
         
         //  - Format URL
         guard let url = URL(string: menu_url) else { return }
         
-        // 2. Parses JSON from "Search for Venues" request
+        // 2. Parses JSON from "Menu" request
         URLSession.shared.dataTask(with: url) { (data, response, err) in
             guard let data = data else {return}
             
             do {
                 let decoder = JSONDecoder()
 
-                let menu = try decoder.decode(Menu.self, from: data)
-                if menu.response.menu.menus.count > 0 {
+                var menu : Menu = Menu()
+                
+                let check_menu = try decoder.decode(NoMenu.self, from: data)
+                
+                // Ensures that the restaurant contains a menu
+                let is_menu_available = check_menu.response.menu.menus.count > 0
+                
+                print(check_menu.response.menu.menus.count)
+                if is_menu_available {
+                    menu = try decoder.decode(Menu.self, from: data)
                     completion(true, menu)
                 } else {
                     completion(false, menu)
