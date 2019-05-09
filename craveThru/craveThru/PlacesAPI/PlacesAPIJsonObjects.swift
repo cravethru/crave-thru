@@ -37,7 +37,7 @@ struct Menu : Codable {
     
     struct Menus : Codable {
         let count : Int
-        let items : [Item]
+        let items : [Item]?
     }
     
     struct Menu : Codable {
@@ -46,6 +46,19 @@ struct Menu : Codable {
     
     struct Response : Codable {
         let menu : Menu
+    }
+    
+    let response : Response
+}
+
+struct Restaurant : Codable{
+    struct Venue : Codable{
+        let id : String
+        let name : String
+    }
+    
+    struct Response : Codable{
+        let venues : [Venue]
     }
     
     let response : Response

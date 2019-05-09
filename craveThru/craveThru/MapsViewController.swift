@@ -19,12 +19,12 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
     
     let location_manager = CLLocationManager()
     let region_in_meters: Double = 10000
-    var all_restaurants: [MKMapItem] = []
+    static var all_restaurants: [MKMapItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkLocationServices()
         PlacesAPICaller.getDate()
+        checkLocationServices()
     }
     
     @IBAction func backButton(_ sender: Any) {
@@ -180,22 +180,23 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
                 guard let response = response else { return }
 //                print(category)
                 
-                var counter = 1
+//                var counter = 1
                 
                 //  - Create Annotations on Map
                 for item in response.mapItems {
                     let annotation = MKPointAnnotation()
+//                    let lat = item.placemark.coordinate.latitude
+//                    let lon = item.placemark.coordinate.longitude
                     
                     //  - Store ea. restaurant's info
                     annotation.title = item.name
                     annotation.coordinate = item.placemark.coordinate
                     
-//                    print("\t\(counter)) \(String(describing: item.name))")
-                    
-                    counter += 1
+//                    print("\(counter)) \(String(describing: item.name)) = Lat: \(lat), Lon: \(lon)")
+//                    counter += 1
                     
                     //  - Store Restaurant
-                    self.all_restaurants.append(item)
+//                    self.all_restaurants.append(item)
                     DispatchQueue.main.async {
                         self.map_view.addAnnotation(annotation)
                     }
@@ -206,17 +207,17 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
 //        let kfc_venue_id = "4f32039619833175d609c7e4"
 //        let subway_id = "4f32039619833175d609c7e4" // It's KFC
 //        let subway_id = "50bd3985e4b0e286cdea0b6a"
-        let subway_id = "540686c4498e1d19d58460c5" // It's Panera Bread
-        PlacesAPICaller.getMenu(venue_id: subway_id, completion: { finished, menu in
-            if finished {
-                print("Success")
-                print(menu.response.menu.menus.count)
-                PlacesAPICaller.printMenu(menu: menu)
-            } else {
-                print("YOU FAILURE")
-            }
-        })
-        print("HELLO")
+//        let venue_id = "540686c4498e1d19d58460c5" // It's Panera Bread
+//        PlacesAPICaller.getMenu(venue_id: venue_id, completion: { finished, menu in
+//            if finished {
+//                print("Success")
+//                print(menu.response.menu.menus.count)
+//                PlacesAPICaller.printMenu(menu: menu)
+//            } else {
+//                print("YOU FAILURE")
+//            }
+//        })
+
 //        print(menu.response.menu.menus.items[0].name)
 //        PlacesAPICaller.printMenu(entries: menu)
         

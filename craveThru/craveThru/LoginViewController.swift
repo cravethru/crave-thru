@@ -65,12 +65,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
 //    }
     
     @IBAction func onLogin(_ sender: Any) {
-        let emailText = emailField.text!
-        let passwordText = passwordField.text!
+//        let emailText = emailField.text!
+//        let passwordText = passwordField.text!
         
-        if emailText == "" && passwordText == ""{
-            self.performSegue(withIdentifier: "LoginSegue", sender: self)
-        }
+//        if emailText == "" && passwordText == ""{
+//            self.performSegue(withIdentifier: "LoginSegue", sender: self)
+//        }
+
+        let emailText = "egonzalez-lopez@csumb.edu"
+        let passwordText = "test123"
         
         Auth.auth().signIn(withEmail: emailText, password: passwordText) {(user, error) in
             if error != nil{
