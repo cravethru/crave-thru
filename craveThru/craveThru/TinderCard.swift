@@ -6,7 +6,7 @@
 //  Copyright © 2019 Eros Gonzalez. All rights reserved.
 //
 let NAMES = ["Adam Gontier","Matt Walst","Brad Walst","Neil Sanderson","Barry Stock","Nicky Patson"]
-let THERESOLD_MARGIN = (UIScreen.main.bounds.size.height/2) * 0.75
+let THERESOLD_MARGIN = (UIScreen.main.bounds.size.height/2) * 0.25
 let SCALE_STRENGTH : CGFloat = 4
 let SCALE_RANGE : CGFloat = 0.90
 
@@ -59,13 +59,6 @@ class TinderCard: UIView {
         backGroundImageView.contentMode = .scaleAspectFill
         backGroundImageView.clipsToBounds = true;
         addSubview(backGroundImageView)
-        
-        let profileImageView = UIImageView(frame:CGRect(x: 20, y: frame.size.height - 80, width: 60, height: 60))
-        profileImageView.image = UIImage(named:"profileimage1")
-        profileImageView.contentMode = .scaleAspectFill
-        profileImageView.layer.cornerRadius = 25
-        profileImageView.clipsToBounds = true
-        addSubview(profileImageView)
         
         let labelText = UILabel(frame:CGRect(x: 90, y: frame.size.height - 80, width: frame.size.width - 100, height: 60))
         let attributedText = NSMutableAttributedString(string: NAMES[Int(arc4random_uniform(UInt32(NAMES.count)))], attributes: [.foregroundColor: UIColor.white,.font:UIFont.boldSystemFont(ofSize: 25)])
@@ -191,7 +184,6 @@ class TinderCard: UIView {
     }
     // left click action
     func leftClickAction() {
-        
         imageViewStatus.image = #imageLiteral(resourceName: "btn_skip_pressed")
         overLayImage.image = #imageLiteral(resourceName: "overlay_skip")
         let finishPoint = CGPoint(x: center.x - frame.size.width * 2, y: center.y)

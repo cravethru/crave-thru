@@ -135,6 +135,9 @@
                                                 <rect key="frame" x="8" y="52" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="icon-6 copy"/>
+                                                <connections>
+                                                    <segue destination="bQq-0E-NRM" kind="presentation" id="KX4-R1-NFy"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -176,6 +179,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zwh-sg-O0p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4192.753623188406" y="667.63392857142856"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="4CH-yf-6mw">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" id="bQq-0E-NRM" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aA2-oL-3eA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5124" y="668"/>
         </scene>
     </scenes>
     <resources>
