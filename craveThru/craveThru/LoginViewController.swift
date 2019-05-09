@@ -50,7 +50,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
 //            print ("segue")
 //        }
 //    }
-//
 //    func locationForce() -> Void{
 //        if CLLocationManager.locationServicesEnabled() {
 //            switch CLLocationManager.authorizationStatus() {

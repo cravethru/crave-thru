@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 import MapKit
-import Koloda
 
 let  MAX_BUFFER_SIZE = 3;
 let  SEPERATOR_DISTANCE = 8;
@@ -19,7 +18,7 @@ class HomeViewController: UIViewController {
     var db: Firestore!
 
     let location_manager = CLLocationManager()
-    
+
     @IBOutlet weak var viewTinderBackGround: UIView!
     @IBOutlet weak var viewActions: UIView!
     

@@ -29,13 +29,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
 
         db = Firestore.firestore()
         
-        if Auth.auth().currentUser != nil{
-            let user = Auth.auth().currentUser!
-            let dbRef = db.collection("users").document(user.uid)
-            getDataFromDatabase(dbRef: dbRef)
-        }
+        let user = Auth.auth().currentUser!
+        let dbRef = db.collection("users").document(user.uid)
         
-        
+        getDataFromDatabase(dbRef: dbRef)
         // Do any additional setup after loading the view.
     }
     
@@ -75,22 +72,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             onSortByAllButton.setImage(UIImage(named: "list_color"), for: .normal)
         }
         
-    }
-    
-    @IBAction func onLogout(_ sender: Any) {
-        do
-        {
-            try Auth.auth().signOut()
-            self.performSegue(withIdentifier: "logout", sender: self)
-        }
-        catch let error as NSError
-        {
-            print (error.localizedDescription)
-        }
-    }
-    
-    @IBAction func onBackButton(_ sender: Any) {
-        self.dismiss(animated:true , completion: nil)
     }
     
     @IBAction func onSortBySaved(_ sender: Any) {
