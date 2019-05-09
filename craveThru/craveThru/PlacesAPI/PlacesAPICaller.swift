@@ -51,7 +51,75 @@ class PlacesAPICaller {
         current_date = "\(year!)\(formatted_month)\(formatted_day)"
     }
     
-    class func getMenu(venue_id : String, completion: @escaping (Bool, Menu) -> Void) {
+    /*
+     To
+     PlacesAPICaller.getMenu(restaurant_name: item.name!, lat: lat, lon: lon, completion: { (got_menu, menu) in
+         if got_menu {
+            PlacesAPICaller.printMenu(menu: menu)
+         } else {
+            print("\n\(String(describing: item.name)) does not have a menu.")
+         }
+     })
+     
+     */
+    
+    class func getMenu(restaurant_name : String, lat : Double, lon : Double, completion : @escaping (Bool, Menu) -> Void) {
+//        print("Getting \(restaurant_name)'s Menu")
+        requestVenues(lat: lat, lon: lon) { (got_venues, venues) in
+            if got_venues {
+//                print("--- 1) Got the venues at that Coordinate! ---")
+                requestVenueID(venue: venues, venueName: restaurant_name, completion: { (got_venue_id, venue_id) in
+                    if got_venue_id {
+//                        print("--- 2) Got Venue ID: \(restaurant_name) = \(venue_id)")
+                        requestMenu(venue_id: venue_id, completion: { (got_menu, menu) in
+                            if got_menu {
+                                completion(true, menu)
+                            } else {
+                                completion(false, menu)
+                            }
+                        })
+                    }
+                })
+            }
+        }
+    }
+    
+    class func requestVenues(lat : Double, lon : Double, completion: @escaping (Bool, Restaurant) -> Void) {
+        let responseURL = "https://api.foursquare.com/v2/venues/search?ll=\(lat),\(lon)&client_id=\(client_id)&client_secret=\(client_secret)&v=\(current_date)"
+        
+        //  - Format URL
+        guard let url = URL(string: responseURL) else { return }
+        
+        // 2. Parses JSON from "Menu" request
+        URLSession.shared.dataTask(with: url) { (data, response, err) in
+            guard let data = data else { return }
+            
+            do {
+                let decoder = JSONDecoder()
+                
+                let venues = try decoder.decode(Restaurant.self, from: data)
+                let is_restaurants_available = venues.response.venues.count > 0
+                
+                is_restaurants_available ? completion(true,venues) : completion(false, venues)
+            } catch let parsingError {
+                print("Error in getting Venues: ", parsingError)
+            }
+        }.resume()
+    }
+    
+    class func requestVenueID(venue: Restaurant, venueName: String, completion: @escaping (Bool, String) -> Void) {
+        let restaurants = venue.response.venues
+        
+        for r in restaurants {
+            if(r.name == "\(venueName)"){
+                completion(true, r.id)
+                break
+            }
+        }
+        completion(false, "error")
+    }
+    
+    class func requestMenu(venue_id : String, completion: @escaping (Bool, Menu) -> Void) {
         let menu_url = "https://api.foursquare.com/v2/venues/\(venue_id)/menu?client_id=\(client_id)&client_secret=\(client_secret)&v=\(current_date)"
         
         //  - Format URL
@@ -64,21 +132,14 @@ class PlacesAPICaller {
             do {
                 let decoder = JSONDecoder()
                 
-                print("Checking Menu")
                 let menu = try decoder.decode(Menu.self, from: data)
                 
                 // Ensures that the restaurant contains a menu
                 let is_menu_available = menu.response.menu.menus.count > 0
                 
-                print("# of menus: \(menu.response.menu.menus.count)")
-                
-                if is_menu_available {
-                    completion(true, menu)
-                } else {
-                    completion(false, menu)
-                }
+                is_menu_available ? completion(true, menu) : completion(false, menu)
             } catch let parsingError {
-                print("Error", parsingError)
+                print("Error in getting Menu for \(venue_id): ", parsingError)
             }
         }.resume()
     }
@@ -86,18 +147,18 @@ class PlacesAPICaller {
     class func printMenu(menu : Menu) {
         let menus = menu.response.menu.menus.items
         
-        for m in menus {
-            print("Name of Menu: \(m.name)")
+        for m in menus! {
+            print("\tName of Menu: \(m.name)")
             
             let sections = m.entries.items
             print(sections.count)
             for s in sections {
-                print("\t\(s.name)")
+                print("\t\t\(s.name)")
                 
                 var counter = 1
                 let food = s.entries.items
                 for f in food {
-                    print("\t\t\(counter)) \(f.name)")
+                    print("\t\t\t\(counter)) \(f.name)")
                     counter += 1
                 }
             }
