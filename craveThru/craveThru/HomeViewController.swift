@@ -10,10 +10,24 @@ import UIKit
 import Firebase
 import MapKit
 
+let  MAX_BUFFER_SIZE = 3;
+let  SEPERATOR_DISTANCE = 8;
+let  TOPYAXIS = 75;
+
 class HomeViewController: UIViewController {
     var db: Firestore!
 
     let location_manager = CLLocationManager()
+
+    @IBOutlet weak var viewTinderBackGround: UIView!
+    @IBOutlet weak var viewActions: UIView!
+    
+    var currentIndex = 0
+    var currentLoadedCardsArray = [TinderCard]()
+    var allCardsArray = [TinderCard]()
+    var valueArray = ["1","2","3","4","5"]
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,39 +36,114 @@ class HomeViewController: UIViewController {
         let image = UIImage(named: "logoColor.png")
         imageView.image = image
         navigationItem.titleView = imageView
-        
         let settings = FirestoreSettings()
         
         Firestore.firestore().settings = settings
         // [END setup]
         db = Firestore.firestore()
         
-        
-        // Testing All Restaurants show
-//        let defaults = UserDefaults.standard
-//        print(defaults.array(forKey: "restaurant_names") ?? "Nothing")
+        viewActions.alpha = 0
 
-        if CLLocationManager.locationServicesEnabled() {
-            checkLocationAuthorization()
-        } else {
-            print("NOT ALLOWED LOCATION")
-        }
-        
-        // * Used to Automatically update the default tip from different view
-        NotificationCenter.default.addObserver(self, selector: #selector(notification_fired(_:)), name: Notification.Name("get_restaurants"), object: nil)
+//        if CLLocationManager.locationServicesEnabled() {
+//            checkLocationAuthorization()
+//        } else {
+//            print("NOT ALLOWED LOCATION")
+//        }
     }
     
-    @objc func notification_fired(_ notification: Notification) {
-//        let defaults = UserDefaults.standard
-//        let restaurants: Array = defaults.array(forKey: "restaurants") as! [MKMapItem]
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        view.layoutIfNeeded()
+        loadCardValues()
+    }
+    
+    func loadCardValues() {
         
-        print("Got notification! In Home View")
-//
-//        var i = 0
-//        for r in restaurants {
-//            print("\(i)) \(String(describing: r.name))")
-//            i += 1
+        if valueArray.count > 0 {
+            
+            let capCount = (valueArray.count > MAX_BUFFER_SIZE) ? MAX_BUFFER_SIZE : valueArray.count
+            
+            for (i,value) in valueArray.enumerated() {
+                let newCard = createTinderCard(at: i,value: value)
+                allCardsArray.append(newCard)
+                if i < capCount {
+                    currentLoadedCardsArray.append(newCard)
+                }
+            }
+            
+            for (i,_) in currentLoadedCardsArray.enumerated() {
+                if i > 0 {
+                    viewTinderBackGround.insertSubview(currentLoadedCardsArray[i], belowSubview: currentLoadedCardsArray[i - 1])
+                }else {
+                    viewTinderBackGround.addSubview(currentLoadedCardsArray[i])
+                }
+            }
+            animateCardAfterSwiping()
+            perform(#selector(loadInitialDummyAnimation), with: nil, afterDelay: 1.0)
+        }
+    }
+    
+    @objc func loadInitialDummyAnimation() {
+        
+        let dummyCard = currentLoadedCardsArray.first;
+        dummyCard?.shakeAnimationCard()
+        UIView.animate(withDuration: 1.0, delay: 2.0, options: .curveLinear, animations: {
+            self.viewActions.alpha = 1.0
+        }, completion: nil)
+        //Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.animateEmojiView), userInfo: emojiView, repeats: true)
+    }
+    
+    func createTinderCard(at index: Int , value :String) -> TinderCard {
+        
+        let card = TinderCard(frame: CGRect(x: 0, y: 0, width: viewTinderBackGround.frame.size.width , height: viewTinderBackGround.frame.size.height - 50) ,value : value)
+        card.delegate = self
+        return card
+    }
+    
+    func removeObjectAndAddNewValues() {
+        //emojiView.rateValue =  2.5
+//        UIView.animate(withDuration: 0.5) {
+//            self.buttonUndo.alpha = 0
 //        }
+        currentLoadedCardsArray.remove(at: 0)
+        currentIndex = currentIndex + 1
+        //Timer.scheduledTimer(timeInterval: 1.01, target: self, selector: #selector(enableUndoButton), userInfo: currentIndex, repeats: false)
+        
+        if (currentIndex + currentLoadedCardsArray.count) < allCardsArray.count {
+            let card = allCardsArray[currentIndex + currentLoadedCardsArray.count]
+            var frame = card.frame
+            frame.origin.y = CGFloat(MAX_BUFFER_SIZE * SEPERATOR_DISTANCE)
+            card.frame = frame
+            currentLoadedCardsArray.append(card)
+            viewTinderBackGround.insertSubview(currentLoadedCardsArray[MAX_BUFFER_SIZE - 1], belowSubview: currentLoadedCardsArray[MAX_BUFFER_SIZE - 2])
+        }
+        print(currentIndex)
+        animateCardAfterSwiping()
+    }
+    
+    func animateCardAfterSwiping() {
+        for (i,card) in currentLoadedCardsArray.enumerated() {
+            UIView.animate(withDuration: 0.5, animations: {
+                if i == 0 {
+                    card.isUserInteractionEnabled = true
+                }
+                var frame = card.frame
+                frame.origin.y = CGFloat(i * SEPERATOR_DISTANCE)
+                card.frame = frame
+            })
+        }
+    }
+    
+    @IBAction func disLikeButtonAction(_ sender: Any) {
+        
+        let card = currentLoadedCardsArray.first
+        card?.leftClickAction()
+    }
+    
+    @IBAction func LikeButtonAction(_ sender: Any) {
+        
+        let card = currentLoadedCardsArray.first
+        card?.rightClickAction()
     }
     
     @IBAction func onSaved(_ sender: Any) {
@@ -64,7 +153,7 @@ class HomeViewController: UIViewController {
         let isAddedTo = true
         
         //API values here to create restaurant object
-        var restaurant = Restaurant(restaurantAPIRequestId: "x", restaurantName: "x", typeOfFood: "x", menu: "x", distanceFromUser: 0.0, thumbnailUrl: "x")
+        let restaurant = Restaurant(restaurantAPIRequestId: "x", restaurantName: "x", typeOfFood: "x", menu: "x", distanceFromUser: 0.0, thumbnailUrl: "x")
         restaurant.setAddress(street: "x", city: "x", state: "x", country: "x", zip: 0.0)
         
         restaurant.setIsAddedTo(destination: destination, isAddedTo: isAddedTo)
@@ -214,14 +303,28 @@ class HomeViewController: UIViewController {
     @IBAction func mapsButton(_ sender: Any) {
         performSegue(withIdentifier: "MapsSegue", sender: self)
     }
+}
+
+extension HomeViewController : TinderCardDelegate{
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    // action called when the card goes to the left.
+    func cardGoesUp(card: TinderCard) {
+        removeObjectAndAddNewValues()
+    }
+    // action called when the card goes to the right.
+    func cardGoesDown(card: TinderCard) {
+        removeObjectAndAddNewValues()
+    }
+    func currentCardStatus(card: TinderCard, distance: CGFloat) {
+        
+        if distance == 0 {
+            //emojiView.rateValue =  2.5
+        }else{
+            let value = Float(min(abs(distance/100), 1.0) * 5)
+            let sorted = distance > 0  ? 2.5 + (value * 5) / 10  : 2.5 - (value * 5) / 10
+            //emojiView.rateValue =  sorted
+        }
+        
+        
+    }
 }

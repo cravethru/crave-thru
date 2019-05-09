@@ -206,17 +206,17 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
 //        let kfc_venue_id = "4f32039619833175d609c7e4"
 //        let subway_id = "4f32039619833175d609c7e4" // It's KFC
 //        let subway_id = "50bd3985e4b0e286cdea0b6a"
-        let subway_id = "540686c4498e1d19d58460c5" // It's Panera Bread
-        PlacesAPICaller.getMenu(venue_id: subway_id, completion: { finished, menu in
-            if finished {
-                print("Success")
-                print(menu.response.menu.menus.count)
-                PlacesAPICaller.printMenu(menu: menu)
-            } else {
-                print("YOU FAILURE")
-            }
-        })
-        print("HELLO")
+//        let subway_id = "540686c4498e1d19d58460c5" // It's Panera Bread
+//        PlacesAPICaller.getMenu(venue_id: subway_id, completion: { finished, menu in
+//            if finished {
+//                print("Success")
+//                print(menu.response.menu.menus.count)
+//                PlacesAPICaller.printMenu(menu: menu)
+//            } else {
+//                print("YOU FAILURE")
+//            }
+//        })
+//        print("HELLO")
 //        print(menu.response.menu.menus.items[0].name)
 //        PlacesAPICaller.printMenu(entries: menu)
         

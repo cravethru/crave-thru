@@ -16,6 +16,7 @@
 		0B26926F2264634E007C38A4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B26926E2264634E007C38A4 /* ProfileViewController.swift */; };
 		0BD46CC1225BF9F000D4914C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD46CC0225BF9F000D4914C /* LoginViewController.swift */; };
 		0BD46CC3225BFF2700D4914C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD46CC2225BFF2700D4914C /* HomeViewController.swift */; };
+		1D265B66228392DD00814D35 /* TinderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D265B65228392DD00814D35 /* TinderCard.swift */; };
 		1D502A6B225FD23D007CDB1E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */; };
 		1D502A6D2260196F007CDB1E /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D502A6C2260196F007CDB1E /* Signup.storyboard */; };
 		1D502A6F22601A71007CDB1E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D502A6E22601A71007CDB1E /* SignupViewController.swift */; };
@@ -67,6 +68,7 @@
 		0B26926E2264634E007C38A4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0BD46CC0225BF9F000D4914C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0BD46CC2225BFF2700D4914C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		1D265B65228392DD00814D35 /* TinderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderCard.swift; sourceTree = "<group>"; };
 		1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1D502A6C2260196F007CDB1E /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		1D502A6E22601A71007CDB1E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				1DA34CF4227EA1D200C8ACEF /* LocationOffViewController.swift */,
 				1D502A6E22601A71007CDB1E /* SignupViewController.swift */,
 				0B0C2893225C03EF00E5B2C9 /* Home.storyboard */,
+				1D265B65228392DD00814D35 /* TinderCard.swift */,
 				0B26926C2264633D007C38A4 /* Profile.storyboard */,
 				1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */,
 				1D5DBFC12267D3600096B455 /* ProfileFavoritesTableViewCell.swift */,
@@ -509,6 +512,7 @@
 				2807ADD2228257F900D1F8F5 /* YelpAPIJsonObjects.swift in Sources */,
 				0B26926F2264634E007C38A4 /* ProfileViewController.swift in Sources */,
 				2807ADD0228249FE00D1F8F5 /* YelpAPICaller.swift in Sources */,
+				1D265B66228392DD00814D35 /* TinderCard.swift in Sources */,
 				28985CE6225B03020038193D /* MapsViewController.swift in Sources */,
 				1D7F3A3B2256F6920014E62F /* AppDelegate.swift in Sources */,
 				2807ADCD2280DA8500D1F8F5 /* PlacesAPIJsonObjects.swift in Sources */,
@@ -681,13 +685,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HYUR38GUTQ;
+				DEVELOPMENT_TEAM = 2468FJX2LR;
 				INFOPLIST_FILE = craveThru/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = CraveThruMaps;
+				PRODUCT_BUNDLE_IDENTIFIER = CraveThru;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -700,13 +704,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HYUR38GUTQ;
+				DEVELOPMENT_TEAM = 2468FJX2LR;
 				INFOPLIST_FILE = craveThru/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = CraveThruMaps;
+				PRODUCT_BUNDLE_IDENTIFIER = CraveThru;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
