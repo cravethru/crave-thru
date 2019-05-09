@@ -33,36 +33,36 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if CLLocationManager.locationServicesEnabled() {
-            switch CLLocationManager.authorizationStatus() {
-            case .notDetermined, .restricted, .denied:
-                locationManager.requestWhenInUseAuthorization()
-                locationForce()
-                break
-            case .authorizedAlways, .authorizedWhenInUse:
-                print("Access")
-                break
-            }
-        }else{
-            locationManager.requestWhenInUseAuthorization()
-            self.performSegue(withIdentifier: "LocationOffSegue", sender: self)
-            print ("segue")
-        }
-    }
-
-    func locationForce() -> Void{
-        if CLLocationManager.locationServicesEnabled() {
-            switch CLLocationManager.authorizationStatus() {
-            case .notDetermined, .restricted, .denied:
-                self.performSegue(withIdentifier: "LocationOffSegue", sender: self)
-                print ("segue")
-                break
-            case .authorizedAlways, .authorizedWhenInUse:
-                return
-            }
-        }
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        if CLLocationManager.locationServicesEnabled() {
+//            switch CLLocationManager.authorizationStatus() {
+//            case .notDetermined, .restricted, .denied:
+//                locationManager.requestWhenInUseAuthorization()
+//                locationForce()
+//                break
+//            case .authorizedAlways, .authorizedWhenInUse:
+//                print("Access")
+//                break
+//            }
+//        }else{
+//            locationManager.requestWhenInUseAuthorization()
+//            self.performSegue(withIdentifier: "LocationOffSegue", sender: self)
+//            print ("segue")
+//        }
+//    }
+//
+//    func locationForce() -> Void{
+//        if CLLocationManager.locationServicesEnabled() {
+//            switch CLLocationManager.authorizationStatus() {
+//            case .notDetermined, .restricted, .denied:
+//                self.performSegue(withIdentifier: "LocationOffSegue", sender: self)
+//                print ("segue")
+//                break
+//            case .authorizedAlways, .authorizedWhenInUse:
+//                return
+//            }
+//        }
+//    }
     
     @IBAction func onLogin(_ sender: Any) {
         let emailText = emailField.text!
