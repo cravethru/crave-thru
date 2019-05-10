@@ -13,7 +13,7 @@ class ExpandedViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var imageSwipe: UIImageView!
     
-    let imageNames = ["1", "2", "3", "4", "5"]
+    let imageNames = ["0", "1", "2", "3", "4"]
     var currentImage = 0
     
     override func viewDidLoad() {

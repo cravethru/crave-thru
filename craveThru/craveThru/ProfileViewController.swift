@@ -22,7 +22,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var onSortByLikedButton: UIButton!
     
     
-    var imgArray = [UIImage(named: "1"), UIImage(named: "2"),UIImage(named: "3"),UIImage(named: "4"),UIImage(named: "5")]
+    var imgArray = [UIImage(named: "0"), UIImage(named: "1"),UIImage(named: "2"),UIImage(named: "3"),UIImage(named: "4")]
 
     override func viewDidLoad() {
         super.viewDidLoad()
