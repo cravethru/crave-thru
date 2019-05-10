@@ -106,6 +106,12 @@
                                                                 </label>
                                                             </subviews>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="descriptionLabel" destination="Oes-KV-VrC" id="6wt-ph-yp1"/>
+                                                            <outlet property="itemNameLabel" destination="Mc9-70-8r1" id="dbH-Be-YWF"/>
+                                                            <outlet property="priceLabel" destination="Oh7-10-lfK" id="hn3-M4-eUC"/>
+                                                            <outlet property="tagLabel" destination="VvN-e7-eT4" id="bXO-Xz-qQc"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                                 <connections>
@@ -174,6 +180,7 @@
                     <size key="freeformSize" width="414" height="1200"/>
                     <connections>
                         <outlet property="imageSwipe" destination="BfA-IU-3N7" id="stp-9s-zQs"/>
+                        <outlet property="restaurantNameLabel" destination="S5G-oK-aPv" id="oNI-9M-DGh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zwh-sg-O0p" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -130,6 +130,13 @@ class HomeViewController: UIViewController {
         if let profVC = segue.destination as? ProfileViewController {
             profVC.prevVC = "home"
         }
+        if let detVC = segue.destination as? ExpandedViewController{
+            let currentCard = allCardsArray[currentIndex]
+            
+            detVC.restaurantName = currentCard.currentName
+            detVC.lat = currentCard.currentLat
+            detVC.lon = currentCard.currentLon
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -375,12 +382,15 @@ class HomeViewController: UIViewController {
     
     @IBAction func detailButton(_ sender: Any) {
         print (allCardsArray[currentIndex].currentName, allCardsArray[currentIndex].currentLat, allCardsArray[currentIndex].currentLon)
+        prepare(for: <#T##UIStoryboardSegue#>, sender: <#T##Any?#>)
         //performSegue(withIdentifier: "DetailSegue", sender: self)
     }
     
     @IBAction func mapsButton(_ sender: Any) {
         performSegue(withIdentifier: "MapsSegue", sender: self)
     }
+    
+    
 }
 
 extension HomeViewController : TinderCardDelegate{
@@ -406,3 +416,6 @@ extension HomeViewController : TinderCardDelegate{
         
     }
 }
+
+
+

@@ -16,6 +16,15 @@ class ExpandedViewController: UIViewController, UITableViewDelegate, UITableView
     let imageNames = ["0", "1", "2", "3", "4"]
     var currentImage = 0
     
+    var restaurantName = String()
+    var lat = 0.0
+    var lon = 0.0
+    
+    var itemName = String()
+    
+    var menuCount = 0
+    @IBOutlet weak var restaurantNameLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,15 +35,20 @@ class ExpandedViewController: UIViewController, UITableViewDelegate, UITableView
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGestureLeft))
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
         imageSwipe.addGestureRecognizer(swipeLeft)
-        
-        
+  
         //TODO LEFT RIGHT TAPS
         
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
+        restaurantNameLabel.text = restaurantName
+        
+        PlacesAPICaller.getMenu(restaurant_name: restaurantName, lat: lat, lon: lon) { (isFinished, menu) in
+            if isFinished {
+                
+            }
+        }
     }
     
     
@@ -64,6 +78,8 @@ class ExpandedViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath) as! MenuTableViewCell
+        
+        cell.itemNameLabel.text
         
         return cell
     }
