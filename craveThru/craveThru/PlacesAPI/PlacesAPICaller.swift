@@ -52,7 +52,7 @@ class PlacesAPICaller {
     }
     
     /*
-     To
+     
      PlacesAPICaller.getMenu(restaurant_name: item.name!, lat: lat, lon: lon, completion: { (got_menu, menu) in
          if got_menu {
             PlacesAPICaller.printMenu(menu: menu)

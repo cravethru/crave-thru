@@ -27,6 +27,25 @@ class LocationOffViewController: UIViewController {
                 spinner.startAnimating()
                 timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(stopLoadingSpinner), userInfo: nil, repeats: false)
                 super.viewWillAppear(animated)
+                
+                // Denied: Not allowed, denied once? Pop up won't show up
+                // Restricted: User cannot change app status, Ex: Parent restricts child's location
+                //  - Show alert instructing them how to turn on permission
+                let title = "Location Services Disabled"
+                let message = "Please enable Location Services in Settings > CraveThru > Location > While Using the App."
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                
+                let settings_action = UIAlertAction(title: "Settings", style: .default) { (UIAlertAction) in
+                    guard let settings_url = URL(string: UIApplication.openSettingsURLString) else { return }
+                    
+                    if UIApplication.shared.canOpenURL(settings_url) {
+                        UIApplication.shared.open(settings_url, options: [:], completionHandler: nil)
+                    }
+                }
+                
+                alert.addAction(settings_action)
+                present(alert, animated: true, completion: nil)
+                
                 break
             case .authorizedAlways, .authorizedWhenInUse:
                 self.performSegue(withIdentifier: "LocationOnSegue", sender: self)
