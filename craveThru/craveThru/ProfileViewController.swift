@@ -12,6 +12,8 @@ import Firebase
 class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
     var db: Firestore!
     
+    var prevVC : UIViewController?
+    
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var memberSinceLabel: UILabel!
     
@@ -24,6 +26,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        generateBarButtons()
+        
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
 
@@ -36,6 +40,74 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
         // Do any additional setup after loading the view.
     }
+    
+    func generateBarButtons() {
+        
+        let titleImageView = UIButton(type: .system)
+        let titleWidthConstraint = titleImageView.widthAnchor.constraint(equalToConstant: 35)
+        let titleHeightConstraint = titleImageView.heightAnchor.constraint(equalToConstant: 35)
+        titleImageView.setImage(UIImage(named: "locoGray")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        titleWidthConstraint.isActive = true
+        titleHeightConstraint.isActive = true
+        titleImageView.addTarget(self, action: #selector(onLogo), for: .touchUpInside)
+        
+        let profileButton = UIButton(type: .system)
+        let profileWidthConstraint = profileButton.widthAnchor.constraint(equalToConstant: 35)
+        let profileHeightConstraint = profileButton.heightAnchor.constraint(equalToConstant: 35)
+        profileButton.setImage(UIImage(named: "userColor")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        profileHeightConstraint.isActive = true
+        profileWidthConstraint.isActive = true
+        profileButton.addTarget(self, action: #selector(self.onProfile), for: .touchUpInside)
+        
+        let mapButton = UIButton(type: .system)
+        let mapWidthConstraint = mapButton.widthAnchor.constraint(equalToConstant: 40)
+        let mapHeightConstraint = mapButton.heightAnchor.constraint(equalToConstant: 40)
+        mapButton.setImage(UIImage(named: "LocationPinGray")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        mapHeightConstraint.isActive = true
+        mapWidthConstraint.isActive = true
+        mapButton.addTarget(self, action: #selector(onMap), for: .touchUpInside)
+        
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: mapButton)
+        navigationItem.titleView = titleImageView
+        
+    }
+    
+    @objc func onProfile() {
+        print("Navigating to profile")
+        
+    }
+    
+    @objc func onMap() {
+        print("Navigation to map screen")
+        
+        if (type(of: prevVC) == type(of: MapsViewController())) {
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        self.performSegue(withIdentifier: "MapsSegue", sender: self)
+        
+    }
+    
+    @objc func onLogo() {
+        print("Logo Clicked")
+        
+        if (type(of: prevVC) == type(of: HomeViewController())) {
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        self.performSegue(withIdentifier: "backHome", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? MapsViewController {
+            destinationVC.prevVC = self;
+        }
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imgArray.count

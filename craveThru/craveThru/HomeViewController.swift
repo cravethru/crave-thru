@@ -32,10 +32,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        let image = UIImage(named: "logoColor.png")
-        imageView.image = image
-        navigationItem.titleView = imageView
+        generateBarButtons()
+        
         let settings = FirestoreSettings()
         
         Firestore.firestore().settings = settings
@@ -49,6 +47,54 @@ class HomeViewController: UIViewController {
 //        } else {
 //            print("NOT ALLOWED LOCATION")
 //        }
+    }
+    
+    func generateBarButtons() {
+        
+        let titleImageView = UIButton(type: .system)
+        let titleWidthConstraint = titleImageView.widthAnchor.constraint(equalToConstant: 35)
+        let titleHeightConstraint = titleImageView.heightAnchor.constraint(equalToConstant: 35)
+        titleImageView.setImage(UIImage(named: "logoColor")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        titleWidthConstraint.isActive = true
+        titleHeightConstraint.isActive = true
+        titleImageView.addTarget(self, action: #selector(onLogo), for: .touchUpInside)
+        
+        
+        let profileButton = UIButton(type: .system)
+        let profileWidthConstraint = profileButton.widthAnchor.constraint(equalToConstant: 35)
+        let profileHeightConstraint = profileButton.heightAnchor.constraint(equalToConstant: 35)
+        profileButton.setImage(UIImage(named: "userGray")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        profileHeightConstraint.isActive = true
+        profileWidthConstraint.isActive = true
+        profileButton.addTarget(self, action: #selector(self.onProfile), for: .touchUpInside)
+        
+        let mapButton = UIButton(type: .system)
+        let mapWidthConstraint = mapButton.widthAnchor.constraint(equalToConstant: 40)
+        let mapHeightConstraint = mapButton.heightAnchor.constraint(equalToConstant: 40)
+        mapButton.setImage(UIImage(named: "LocationPinGray")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        mapHeightConstraint.isActive = true
+        mapWidthConstraint.isActive = true
+        mapButton.addTarget(self, action: #selector(onMap), for: .touchUpInside)
+        
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: mapButton)
+        navigationItem.titleView = titleImageView
+
+    }
+    
+    @objc func onProfile() {
+        print("Navigating to profile")
+        self.performSegue(withIdentifier: "profileSegue", sender: self)
+    }
+    
+    @objc func onMap() {
+        print("Navigation to map screen")
+        self.performSegue(withIdentifier: "MapsSegue", sender: self)
+    }
+    
+    @objc func onLogo() {
+        print("Logo Clicked")
     }
     
     override func viewWillAppear(_ animated: Bool) {
