@@ -45,15 +45,12 @@
                                 <action selector="backButton:" destination="u4N-hY-adh" id="Fv0-V1-7X6"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="mHc-la-OYc">
-                            <connections>
-                                <action selector="searchButton:" destination="u4N-hY-adh" id="Q6U-Bt-azM"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="map_view" destination="Ht0-5q-3gW" id="c6b-E4-ZxT"/>
                         <outlet property="searchDisplayController" destination="RSP-BY-ipk" id="h0Z-Ab-BsG"/>
+                        <segue destination="wDC-9R-6J1" kind="presentation" identifier="backHome" id="xXr-uK-ZVQ"/>
+                        <segue destination="GYu-tJ-Z3O" kind="presentation" identifier="profileSegue" id="CpH-4N-Wih"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LYI-Xp-EkF" sceneMemberID="firstResponder"/>
@@ -66,7 +63,23 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="4436" y="37.331334332833585"/>
+            <point key="canvasLocation" x="4439" y="37"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="4Kf-YS-dA6">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" id="wDC-9R-6J1" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AX0-cp-Lke" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5398" y="-31"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="Z5V-92-bIV">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="GYu-tJ-Z3O" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IIj-2G-ERd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5398" y="112"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2ky-lU-Q8L">
