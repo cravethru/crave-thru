@@ -112,7 +112,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 MapsViewController.requestRestaurants { (is_finished) in
                     if is_finished {
                         print("--Printing all Restaurants--\n")
-                        let restaurants = MapsViewController.all_restaurants
+                        let restaurants = PlacesAPICaller.all_restaurants
                         
                         var counter = 1
                         for item in restaurants {

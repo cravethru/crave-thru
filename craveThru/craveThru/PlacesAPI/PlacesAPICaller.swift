@@ -17,6 +17,8 @@ class PlacesAPICaller {
     // Current Date
     static var current_date : String = ""
     
+    static var all_restaurants = [MKMapItem]()
+    
     // Requires current date in URL
     class func getDate() {
         // 1. Setup Date & Calendar

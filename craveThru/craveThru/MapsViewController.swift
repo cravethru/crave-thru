@@ -20,7 +20,6 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
     var prevVC : String!
     static let region_in_meters: Double = 10000
     static var location_manager = CLLocationManager()
-    static var all_restaurants = [MKMapItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -204,7 +203,7 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
     
     // 4. Display pin to for each restaurant on Map
     func populateAnnotations() {
-        let restaurants = MapsViewController.all_restaurants
+        let restaurants = PlacesAPICaller.all_restaurants
         
         for item in restaurants {
             let annotation = MKPointAnnotation()
@@ -225,7 +224,7 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
         if let location = MapsViewController.location_manager.location?.coordinate {
             let categories = ["Restaurants", "Fast Food"]
             
-            all_restaurants.removeAll()
+            PlacesAPICaller.all_restaurants.removeAll()
             
             //  - Search
             for category in categories {
@@ -236,7 +235,7 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
 //                        print("\t\t\t\(String(describing: r.name))")
 //                    }
                     
-                    all_restaurants.append(contentsOf: restaurants_found)
+                    PlacesAPICaller.all_restaurants.append(contentsOf: restaurants_found)
                 }
             }
         }
