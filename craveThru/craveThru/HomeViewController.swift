@@ -374,12 +374,8 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func detailButton(_ sender: Any) {
-        if (allCardsArray[currentIndex].currentName == "Panera Bread"){
-            performSegue(withIdentifier: "DetailSegue", sender: self)
-        }
-        else{
-            print ("LMAO")
-        }
+        print (allCardsArray[currentIndex].currentName, allCardsArray[currentIndex].currentLat, allCardsArray[currentIndex].currentLon)
+        //performSegue(withIdentifier: "DetailSegue", sender: self)
     }
     
     @IBAction func mapsButton(_ sender: Any) {

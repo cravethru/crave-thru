@@ -27,9 +27,14 @@ class ExpandedViewController: UIViewController, UITableViewDelegate, UITableView
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
         imageSwipe.addGestureRecognizer(swipeLeft)
         
+        
         //TODO LEFT RIGHT TAPS
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+
     }
     
     

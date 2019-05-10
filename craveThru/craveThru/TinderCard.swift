@@ -5,10 +5,12 @@
 //  Created by Eros Gonzalez on 5/8/19.
 //  Copyright © 2019 Eros Gonzalez. All rights reserved.
 //
-let NAMES = ["Panera Bread","KFC","Panera Bread","Panera Bread","Pizza hut","Panera Bread"]
+var NAMES = [String]()
 let THERESOLD_MARGIN = (UIScreen.main.bounds.size.height/2) * 0.25
 let SCALE_STRENGTH : CGFloat = 4
 let SCALE_RANGE : CGFloat = 0.90
+
+let count = PlacesAPICaller.all_restaurants.count
 
 import UIKit
 
@@ -26,13 +28,21 @@ class TinderCard: UIView {
     var imageViewStatus = UIImageView()
     var overLayImage = UIImageView()
     var isLiked = false
+    
+    
     public var currentName = ""
+    public var currentLat = 0.0
+    public var currentLon = 0.0
+    public var currentIndex = 0
     
     
     weak var delegate: TinderCardDelegate?
     
     public init(frame: CGRect, value: String) {
         super.init(frame: frame)
+        for n in 0...PlacesAPICaller.all_restaurants.count - 1{
+            NAMES.append(PlacesAPICaller.all_restaurants[n].name!)
+        }
         setupView(at: value)
     }
     
@@ -42,7 +52,6 @@ class TinderCard: UIView {
     
     
     func setupView(at value:String) {
-        
         layer.cornerRadius = 20
         layer.shadowRadius = 3
         layer.shadowOpacity = 0.4
@@ -63,7 +72,14 @@ class TinderCard: UIView {
         addSubview(backGroundImageView)
         
         let labelText = UILabel(frame:CGRect(x: 90, y: frame.size.height - 80, width: frame.size.width - 100, height: 60))
-        let attributedText = NSMutableAttributedString(string: NAMES[Int(arc4random_uniform(UInt32(NAMES.count)))], attributes: [.foregroundColor: UIColor.white,.font:UIFont.boldSystemFont(ofSize: 25)])
+        currentIndex =  Int(arc4random() % UInt32(count))
+        let attributedText = NSMutableAttributedString(string: NAMES[currentIndex], attributes: [.foregroundColor: UIColor.white,.font:UIFont.boldSystemFont(ofSize: 25)])
+    
+    
+        print (currentIndex)
+        
+        currentLat = PlacesAPICaller.all_restaurants[currentIndex].placemark.coordinate.latitude
+        currentLon = PlacesAPICaller.all_restaurants[currentIndex].placemark.coordinate.longitude
         //attributedText.append(NSAttributedString(string: "\n\(value) mins", attributes: [.foregroundColor: UIColor.white,.font:UIFont.systemFont(ofSize: 18)]))
         //labelText.attributedText = attributedText
         labelText.attributedText = attributedText
