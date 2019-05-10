@@ -115,13 +115,8 @@ class HomeViewController: UIViewController {
     }
     
     func removeObjectAndAddNewValues() {
-        //emojiView.rateValue =  2.5
-//        UIView.animate(withDuration: 0.5) {
-//            self.buttonUndo.alpha = 0
-//        }
         currentLoadedCardsArray.remove(at: 0)
         currentIndex = currentIndex + 1
-        //Timer.scheduledTimer(timeInterval: 1.01, target: self, selector: #selector(enableUndoButton), userInfo: currentIndex, repeats: false)
         
         if (currentIndex + currentLoadedCardsArray.count) < allCardsArray.count {
             let card = allCardsArray[currentIndex + currentLoadedCardsArray.count]
