@@ -42,26 +42,24 @@ class HomeViewController: UIViewController {
         db = Firestore.firestore()
         
         viewActions.alpha = 0
-
-        if CLLocationManager.locationServicesEnabled() {
-            print("ALLOWED LOCATION")
-        } else {
-            print("NOT ALLOWED LOCATION")
-        }
         
-        MapsViewController.location_manager.distanceFilter = kCLLocationAccuracyNearestTenMeters
-        MapsViewController.location_manager.desiredAccuracy = kCLLocationAccuracyBest
-        MapsViewController.location_manager.startUpdatingLocation()  // Calls Delegate method
+        // Error Handling for locations could be done here
+//        if CLLocationManager.locationServicesEnabled() {
+//            print("ALLOWED LOCATION")
+//        } else {
+//            print("NOT ALLOWED LOCATION")
+//        }
+        
         // Get all Restaurants near User Location
-        print("Printing Restaurants")
+//        print("Printing Restaurants")
         
-        let restaurants = MapsViewController.all_restaurants
-        
-        var counter = 1
-        for item in restaurants {
-            print("\(counter)) \(String(describing: item.name))")
-            counter += 1
-        }
+//        let restaurants = MapsViewController.all_restaurants
+//
+//        var counter = 1
+//        for item in restaurants {
+//            print("\(counter)) \(String(describing: item.name))")
+//            counter += 1
+//        }
     }
     
     func generateBarButtons() {

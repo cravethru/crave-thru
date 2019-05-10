@@ -231,17 +231,14 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
             for category in categories {
                 getCategoryRestaurants(category: category, location: location) { (restaurants_found) in
                     
-                    print("\t\t\(category)'s menu")
-                    for r in restaurants_found {
-                        print("\t\t\t\(String(describing: r.name))")
-                    }
+//                    print("\t\t\(category)'s menu")
+//                    for r in restaurants_found {
+//                        print("\t\t\t\(String(describing: r.name))")
+//                    }
                     
                     all_restaurants.append(contentsOf: restaurants_found)
                 }
             }
-            print("--Done searched!--")
-        } else {
-            print("-- USER Location invalid--")
         }
     }
     

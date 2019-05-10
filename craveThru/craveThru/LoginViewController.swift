@@ -110,9 +110,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 break
             case .authorizedAlways, .authorizedWhenInUse:
                 MapsViewController.requestRestaurants { (is_finished) in
-                    print("--Printing all Restaurants--\n")
-                    
                     if is_finished {
+                        print("--Printing all Restaurants--\n")
                         let restaurants = MapsViewController.all_restaurants
                         
                         var counter = 1
