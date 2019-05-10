@@ -23,6 +23,9 @@ class ExpandedViewController: UIViewController, UITableViewDelegate, UITableView
     var itemName = String()
     
     var menuCount = 0
+    
+    var restaurantMenu = Menu()
+    
     @IBOutlet weak var restaurantNameLabel: UILabel!
     
     override func viewDidLoad() {
@@ -46,7 +49,9 @@ class ExpandedViewController: UIViewController, UITableViewDelegate, UITableView
         
         PlacesAPICaller.getMenu(restaurant_name: restaurantName, lat: lat, lon: lon) { (isFinished, menu) in
             if isFinished {
+                self.restaurantMenu = menu
                 
+                print ("LMOA")
             }
         }
     }
@@ -73,13 +78,28 @@ class ExpandedViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        if let food_items = restaurantMenu.response.menu.menus.items {
+            return food_items.count
+            
+            print ("yes tables")
+        }
+        
+        print ("no tablese")
+        
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath) as! MenuTableViewCell
         
-        cell.itemNameLabel.text
+        if let food_items = restaurantMenu.response.menu.menus.items {
+            cell.itemNameLabel.text = food_items[indexPath.row].name
+            cell.descriptionLabel.text = food_items[indexPath.row].description
+            
+            print (cell.itemNameLabel.text, cell.descriptionLabel.text)
+        }
+        
+        print ("penis")
         
         return cell
     }
