@@ -43,11 +43,25 @@ class HomeViewController: UIViewController {
         
         viewActions.alpha = 0
 
-//        if CLLocationManager.locationServicesEnabled() {
-//            checkLocationAuthorization()
-//        } else {
-//            print("NOT ALLOWED LOCATION")
-//        }
+        if CLLocationManager.locationServicesEnabled() {
+            print("ALLOWED LOCATION")
+        } else {
+            print("NOT ALLOWED LOCATION")
+        }
+        
+        MapsViewController.location_manager.distanceFilter = kCLLocationAccuracyNearestTenMeters
+        MapsViewController.location_manager.desiredAccuracy = kCLLocationAccuracyBest
+        MapsViewController.location_manager.startUpdatingLocation()  // Calls Delegate method
+        // Get all Restaurants near User Location
+        print("Printing Restaurants")
+        
+        let restaurants = MapsViewController.all_restaurants
+        
+        var counter = 1
+        for item in restaurants {
+            print("\(counter)) \(String(describing: item.name))")
+            counter += 1
+        }
     }
     
     func generateBarButtons() {
@@ -383,8 +397,8 @@ extension HomeViewController : TinderCardDelegate{
         if distance == 0 {
             //emojiView.rateValue =  2.5
         }else{
-            let value = Float(min(abs(distance/100), 1.0) * 5)
-            let sorted = distance > 0  ? 2.5 + (value * 5) / 10  : 2.5 - (value * 5) / 10
+//            let value = Float(min(abs(distance/100), 1.0) * 5)
+//            let sorted = distance > 0  ? 2.5 + (value * 5) / 10  : 2.5 - (value * 5) / 10
             //emojiView.rateValue =  sorted
         }
         

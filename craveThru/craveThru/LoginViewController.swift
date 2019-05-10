@@ -30,7 +30,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         
         passwordField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         
-        
+        checkLocationAuthorization()
     }
     
 //    override func viewDidAppear(_ animated: Bool) {
@@ -70,7 +70,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
 //        if emailText == "" && passwordText == ""{
 //            self.performSegue(withIdentifier: "LoginSegue", sender: self)
 //        }
-
+        
+        checkLocationAuthorization()
+        
         let emailText = "egonzalez-lopez@csumb.edu"
         let passwordText = "test123"
         
@@ -93,6 +95,37 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     
     @IBAction func onSignup(_ sender: Any) {
         self.performSegue(withIdentifier: "SignupSegueue", sender: self)
+    }
+    
+    // 3. Only run app when user gives access to location
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+            case .denied, .restricted:
+                performSegue(withIdentifier: "LocationOffSegue", sender: nil)
+                break
+            
+            case .notDetermined:
+                MapsViewController.location_manager.requestWhenInUseAuthorization()
+                print("--Not determined--")
+                break
+            case .authorizedAlways, .authorizedWhenInUse:
+                MapsViewController.requestRestaurants { (is_finished) in
+                    print("--Printing all Restaurants--\n")
+                    
+                    if is_finished {
+                        let restaurants = MapsViewController.all_restaurants
+                        
+                        var counter = 1
+                        for item in restaurants {
+                            print("\(counter)) \(String(describing: item.name))")
+                            counter += 1
+                        }
+                    } else {
+                        print("Couldn't get restaurants")
+                    }
+                }
+                break
+        }
     }
 }
 
