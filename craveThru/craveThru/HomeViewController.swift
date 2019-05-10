@@ -14,6 +14,7 @@ let  MAX_BUFFER_SIZE = 3;
 let  SEPERATOR_DISTANCE = 8;
 let  TOPYAXIS = 75;
 
+
 class HomeViewController: UIViewController {
     var db: Firestore!
 
@@ -25,7 +26,7 @@ class HomeViewController: UIViewController {
     var currentIndex = 0
     var currentLoadedCardsArray = [TinderCard]()
     var allCardsArray = [TinderCard]()
-    var valueArray = ["1","2","3","4","5"]
+    var valueArray = ["0","1","2","3","4"]
     
     
     
@@ -80,6 +81,7 @@ class HomeViewController: UIViewController {
             }
             animateCardAfterSwiping()
             perform(#selector(loadInitialDummyAnimation), with: nil, afterDelay: 1.0)
+            
         }
     }
     
@@ -292,7 +294,12 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func detailButton(_ sender: Any) {
-        performSegue(withIdentifier: "DetailSegue", sender: self)
+        if (allCardsArray[currentIndex].currentName == "Panera Bread"){
+            performSegue(withIdentifier: "DetailSegue", sender: self)
+        }
+        else{
+            print ("LMAO")
+        }
     }
     
     @IBAction func mapsButton(_ sender: Any) {

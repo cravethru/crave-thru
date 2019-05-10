@@ -190,7 +190,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1" width="607.5" height="405"/>
+        <image name="1" width="308" height="164"/>
         <image name="icon-6 copy" width="256" height="256"/>
     </resources>
 </document>

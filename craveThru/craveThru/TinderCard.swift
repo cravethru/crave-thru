@@ -5,7 +5,7 @@
 //  Created by Eros Gonzalez on 5/8/19.
 //  Copyright © 2019 Eros Gonzalez. All rights reserved.
 //
-let NAMES = ["Adam Gontier","Matt Walst","Brad Walst","Neil Sanderson","Barry Stock","Nicky Patson"]
+let NAMES = ["Panera Bread","KFC","Panera Bread","Panera Bread","Pizza hut","Panera Bread"]
 let THERESOLD_MARGIN = (UIScreen.main.bounds.size.height/2) * 0.25
 let SCALE_STRENGTH : CGFloat = 4
 let SCALE_RANGE : CGFloat = 0.90
@@ -26,6 +26,8 @@ class TinderCard: UIView {
     var imageViewStatus = UIImageView()
     var overLayImage = UIImageView()
     var isLiked = false
+    public var currentName = ""
+    
     
     weak var delegate: TinderCardDelegate?
     
@@ -62,9 +64,11 @@ class TinderCard: UIView {
         
         let labelText = UILabel(frame:CGRect(x: 90, y: frame.size.height - 80, width: frame.size.width - 100, height: 60))
         let attributedText = NSMutableAttributedString(string: NAMES[Int(arc4random_uniform(UInt32(NAMES.count)))], attributes: [.foregroundColor: UIColor.white,.font:UIFont.boldSystemFont(ofSize: 25)])
-        attributedText.append(NSAttributedString(string: "\n\(value) mins", attributes: [.foregroundColor: UIColor.white,.font:UIFont.systemFont(ofSize: 18)]))
+        //attributedText.append(NSAttributedString(string: "\n\(value) mins", attributes: [.foregroundColor: UIColor.white,.font:UIFont.systemFont(ofSize: 18)]))
+        //labelText.attributedText = attributedText
         labelText.attributedText = attributedText
-        labelText.numberOfLines = 2
+        labelText.numberOfLines = 1
+        currentName = labelText.text!
         addSubview(labelText)
         
         imageViewStatus = UIImageView(frame: CGRect(x: (frame.size.width / 2) - 37.5, y: 25, width: 75, height: 75))
