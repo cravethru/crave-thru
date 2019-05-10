@@ -53,8 +53,8 @@ class HomeViewController: UIViewController {
         
         // Get all Restaurants near User Location
 //        print("Printing Restaurants")
-        
-//        let restaurants = MapsViewController.all_restaurants
+//        
+//        let restaurants = PlacesAPICaller.all_restaurants
 //
 //        var counter = 1
 //        for item in restaurants {
