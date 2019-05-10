@@ -16,6 +16,7 @@
 		0B26926F2264634E007C38A4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B26926E2264634E007C38A4 /* ProfileViewController.swift */; };
 		0BD46CC1225BF9F000D4914C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD46CC0225BF9F000D4914C /* LoginViewController.swift */; };
 		0BD46CC3225BFF2700D4914C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD46CC2225BFF2700D4914C /* HomeViewController.swift */; };
+		1D1BFB2B2284C4C900CD0822 /* RestaurantsCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1BFB2A2284C4C900CD0822 /* RestaurantsCaller.swift */; };
 		1D265B66228392DD00814D35 /* TinderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D265B65228392DD00814D35 /* TinderCard.swift */; };
 		1D502A6B225FD23D007CDB1E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */; };
 		1D502A6D2260196F007CDB1E /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D502A6C2260196F007CDB1E /* Signup.storyboard */; };
@@ -68,6 +69,7 @@
 		0B26926E2264634E007C38A4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0BD46CC0225BF9F000D4914C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0BD46CC2225BFF2700D4914C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		1D1BFB2A2284C4C900CD0822 /* RestaurantsCaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsCaller.swift; sourceTree = "<group>"; };
 		1D265B65228392DD00814D35 /* TinderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderCard.swift; sourceTree = "<group>"; };
 		1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1D502A6C2260196F007CDB1E /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
@@ -131,6 +133,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D1BFB292284C4C900CD0822 /* RestaurantsCaller */ = {
+			isa = PBXGroup;
+			children = (
+				1D1BFB2A2284C4C900CD0822 /* RestaurantsCaller.swift */,
+			);
+			path = RestaurantsCaller;
+			sourceTree = "<group>";
+		};
 		1D7F3A2E2256F6920014E62F = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +166,7 @@
 		1D7F3A392256F6920014E62F /* craveThru */ = {
 			isa = PBXGroup;
 			children = (
+				1D1BFB292284C4C900CD0822 /* RestaurantsCaller */,
 				2807ADCE228249F300D1F8F5 /* YelpAPI */,
 				2807ADC92280DA4500D1F8F5 /* PlacesAPI */,
 				1D7F3A3A2256F6920014E62F /* AppDelegate.swift */,
@@ -517,6 +528,7 @@
 				1D7F3A3B2256F6920014E62F /* AppDelegate.swift in Sources */,
 				2807ADCD2280DA8500D1F8F5 /* PlacesAPIJsonObjects.swift in Sources */,
 				28AFD040226E398600CEB4A7 /* PlacesAPICaller.swift in Sources */,
+				1D1BFB2B2284C4C900CD0822 /* RestaurantsCaller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

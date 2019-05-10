@@ -16,6 +16,7 @@ let  TOPYAXIS = 75;
 
 class HomeViewController: UIViewController {
     var db: Firestore!
+    var prevVC: String!
 
     let location_manager = CLLocationManager()
 
@@ -85,16 +86,37 @@ class HomeViewController: UIViewController {
     
     @objc func onProfile() {
         print("Navigating to profile")
+        
+        if(prevVC == "prof") {
+            self.dismiss(animated: false, completion: nil)
+            return
+        }
+        
         self.performSegue(withIdentifier: "profileSegue", sender: self)
     }
     
     @objc func onMap() {
         print("Navigation to map screen")
+        
+        if(prevVC == "map") {
+            self.dismiss(animated: false, completion: nil)
+            return
+        }
+        
         self.performSegue(withIdentifier: "MapsSegue", sender: self)
     }
     
     @objc func onLogo() {
         print("Logo Clicked")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let mapVC = segue.destination as? MapsViewController {
+            mapVC.prevVC = "home"
+        }
+        if let profVC = segue.destination as? ProfileViewController {
+            profVC.prevVC = "home"
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -147,13 +169,8 @@ class HomeViewController: UIViewController {
     }
     
     func removeObjectAndAddNewValues() {
-        //emojiView.rateValue =  2.5
-//        UIView.animate(withDuration: 0.5) {
-//            self.buttonUndo.alpha = 0
-//        }
         currentLoadedCardsArray.remove(at: 0)
         currentIndex = currentIndex + 1
-        //Timer.scheduledTimer(timeInterval: 1.01, target: self, selector: #selector(enableUndoButton), userInfo: currentIndex, repeats: false)
         
         if (currentIndex + currentLoadedCardsArray.count) < allCardsArray.count {
             let card = allCardsArray[currentIndex + currentLoadedCardsArray.count]

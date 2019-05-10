@@ -12,7 +12,7 @@ import Firebase
 class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
     var db: Firestore!
     
-    var prevVC : UIViewController?
+    var prevVC:String!
     
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var memberSinceLabel: UILabel!
@@ -82,8 +82,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @objc func onMap() {
         print("Navigation to map screen")
         
-        if (type(of: prevVC) == type(of: MapsViewController())) {
-            self.dismiss(animated: true, completion: nil)
+        if (prevVC == "map") {
+            self.dismiss(animated: false, completion: nil)
             return
         }
         
@@ -93,9 +93,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     @objc func onLogo() {
         print("Logo Clicked")
+        print (prevVC)
         
-        if (type(of: prevVC) == type(of: HomeViewController())) {
-            self.dismiss(animated: true, completion: nil)
+        if (prevVC == "home") {
+            self.dismiss(animated: false, completion: nil)
             return
         }
         
@@ -103,9 +104,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationVC = segue.destination as? MapsViewController {
-            destinationVC.prevVC = self;
-        }
+        print (segue.destination)
+        
+        
     }
     
     

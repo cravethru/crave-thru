@@ -17,7 +17,7 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
 
     @IBOutlet weak var map_view: MKMapView!
     
-    var prevVC : UIViewController?
+    var prevVC : String!
     
     let location_manager = CLLocationManager()
     let region_in_meters: Double = 10000
@@ -78,19 +78,13 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
     @objc func onProfile() {
         print("Navigating to profile")
         
-        if (type(of: prevVC) == type(of: ProfileViewController())) {
-            self.dismiss(animated: true, completion: nil)
+        if (prevVC == "prof") {
+            self.dismiss(animated: false, completion: nil)
             return
         }
         
         self.performSegue(withIdentifier: "profileSegue", sender: self)
         
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationVC = segue.destination as? ProfileViewController {
-            destinationVC.prevVC = self;
-        }
     }
     
     @objc func onMap() {
@@ -101,12 +95,18 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
     @objc func onLogo() {
         print("Logo Clicked")
         
-        if (type(of: prevVC) == type(of: HomeViewController())) {
-            self.dismiss(animated: true, completion: nil)
+        if (prevVC == "home") {
+            self.dismiss(animated: false, completion: nil)
             return
         }
         
         self.performSegue(withIdentifier: "backHome", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? ProfileViewController {
+            destinationVC.prevVC = "map";
+        }
     }
     
     //  - When user clicks on "Search" in Keyboard
