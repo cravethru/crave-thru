@@ -66,13 +66,13 @@ class PlacesAPICaller {
      */
     
     class func getMenu(restaurant_name : String, lat : Double, lon : Double, completion : @escaping (Bool, Menu) -> Void) {
-//        print("Getting \(restaurant_name)'s Menu")
+        print("Getting \(restaurant_name)'s Menu")
         requestVenues(lat: lat, lon: lon) { (got_venues, venues) in
             if got_venues {
-//                print("--- 1) Got the venues at that Coordinate! ---")
+                print("--- 1) Got the venues at that Coordinate! ---")
                 requestVenueID(venue: venues, venueName: restaurant_name, completion: { (got_venue_id, venue_id) in
                     if got_venue_id {
-//                        print("--- 2) Got Venue ID: \(restaurant_name) = \(venue_id)")
+                        print("--- 2) Got Venue ID: \(restaurant_name) = \(venue_id)")
                         requestMenu(venue_id: venue_id, completion: { (got_menu, menu) in
                             if got_menu {
                                 completion(true, menu)
@@ -102,7 +102,7 @@ class PlacesAPICaller {
                 let venues = try decoder.decode(Restaurant.self, from: data)
                 let is_restaurants_available = venues.response.venues.count > 0
                 
-                is_restaurants_available ? completion(true,venues) : completion(false, venues)
+                is_restaurants_available ? completion(true, venues) : completion(false, venues)
             } catch let parsingError {
                 print("Error in getting Venues: ", parsingError)
             }

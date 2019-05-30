@@ -20,7 +20,6 @@
 		1D350953228534EC00619816 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D35094B228534EC00619816 /* Main.storyboard */; };
 		1D350954228534EC00619816 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D35094C228534EC00619816 /* Signup.storyboard */; };
 		1D350955228534EC00619816 /* Maps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D35094D228534EC00619816 /* Maps.storyboard */; };
-		1D350959228535D300619816 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D350958228535D300619816 /* Login.storyboard */; };
 		1D502A6B225FD23D007CDB1E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */; };
 		1D502A6F22601A71007CDB1E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D502A6E22601A71007CDB1E /* SignupViewController.swift */; };
 		1D502A71226549EC007CDB1E /* UserProfileFavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D502A70226549EC007CDB1E /* UserProfileFavoritesCollectionViewCell.swift */; };
@@ -73,7 +72,6 @@
 		1D35094B228534EC00619816 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		1D35094C228534EC00619816 /* Signup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		1D35094D228534EC00619816 /* Maps.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Maps.storyboard; sourceTree = "<group>"; };
-		1D350958228535D300619816 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		1D502A6A225FD23D007CDB1E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1D502A6E22601A71007CDB1E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		1D502A70226549EC007CDB1E /* UserProfileFavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileFavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 			isa = PBXGroup;
 			children = (
 				1D350949228534EC00619816 /* LaunchScreen.storyboard */,
-				1D350958228535D300619816 /* Login.storyboard */,
 				1D350945228534EC00619816 /* LocationOffScreen.storyboard */,
 				1D350946228534EC00619816 /* Profile.storyboard */,
 				1D350947228534EC00619816 /* Home.storyboard */,
@@ -373,7 +370,6 @@
 				1D350955228534EC00619816 /* Maps.storyboard in Resources */,
 				1D350954228534EC00619816 /* Signup.storyboard in Resources */,
 				1D35094E228534EC00619816 /* LocationOffScreen.storyboard in Resources */,
-				1D350959228535D300619816 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

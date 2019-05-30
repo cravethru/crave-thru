@@ -130,6 +130,13 @@ class HomeViewController: UIViewController {
         if let profVC = segue.destination as? ProfileViewController {
             profVC.prevVC = "home"
         }
+        if let detVC = segue.destination as? ExpandedViewController{
+            let currentCard = allCardsArray[currentIndex]
+            
+            detVC.restaurantName = currentCard.currentName
+            detVC.lat = currentCard.currentLat
+            detVC.lon = currentCard.currentLon
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -374,8 +381,24 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func detailButton(_ sender: Any) {
-        print (allCardsArray[currentIndex].currentName, allCardsArray[currentIndex].currentLat, allCardsArray[currentIndex].currentLon)
-        //performSegue(withIdentifier: "DetailSegue", sender: self)
+//        print (allCardsArray[currentIndex].currentName, allCardsArray[currentIndex].currentLat, allCardsArray[currentIndex].currentLon)
+        
+//        print("Testing: \(lat), \(lon)")
+        
+//        PlacesAPICaller.getMenu(restaurant_name: allCardsArray[currentIndex].currentName, lat: allCardsArray[currentIndex].currentLat, lon: allCardsArray[currentIndex].currentLon) { (isFinished, menu) in
+//            if isFinished {
+//                ExpandedViewController.restaurantMenu = menu
+//
+//                print ("LMOA")
+//            }
+//        }
+        
+        PlacesAPICaller.requestMenu(venue_id: "4b6521a0f964a52095e52ae3") { (isFinished, menusOnCall) in
+            if isFinished {
+                ExpandedViewController.assignDetails(menusOnCall: menusOnCall)
+                self.performSegue(withIdentifier: "DetailSegue", sender: self)
+            }
+        }
     }
     
     @IBAction func mapsButton(_ sender: Any) {
@@ -406,3 +429,6 @@ extension HomeViewController : TinderCardDelegate{
         
     }
 }
+
+
+

@@ -95,14 +95,9 @@ struct Menu : Codable {
 }
 
 struct Restaurant : Codable {
-    struct Location : Codable {
-        
-    }
-    
     struct Venue : Codable {
         let id : String
         let name : String
-        let location : Location
     }
     
     struct Response : Codable {

@@ -109,6 +109,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 print("--Not determined--")
                 break
             case .authorizedAlways, .authorizedWhenInUse:
+                PlacesAPICaller.getDate()
                 MapsViewController.requestRestaurants { (is_finished) in
                     if is_finished {
                         print("--Printing all Restaurants--\n")
