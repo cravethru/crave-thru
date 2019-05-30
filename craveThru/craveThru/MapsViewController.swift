@@ -24,7 +24,6 @@ class MapsViewController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         generateBarButtons()
-        PlacesAPICaller.getDate()
         checkLocationServices()
 //        checkLocationAuthorization()
         populateAnnotations()
